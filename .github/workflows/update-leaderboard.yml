@@ -1,0 +1,80 @@
+name: Update leaderboard
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch leaderboard
+        run: |
+          set -euo pipefail
+          CANDIDATES="v1.1 v1 v1.2 v2 v1.0"
+          VER=""
+          for v in $CANDIDATES; do
+            code=$(curl -sS -o /dev/null -w "%{http_code}" \
+              --max-time 15 \
+              -I "https://deepswe.datacurve.ai/artifacts/${v}/leaderboard-live.json" || true)
+            if [ "$code" = "200" ]; then
+              VER="$v"
+              break
+            fi
+          done
+          if [ -z "$VER" ]; then
+            echo "no version returned 200" >&2
+            exit 1
+          fi
+          echo "version=${VER}"
+          mkdir -p data
+          curl -sS --max-time 60 \
+            "https://deepswe.datacurve.ai/artifacts/${VER}/leaderboard-live.json" \
+            -o data/leaderboard-live.json
+          printf '%s\n' "${VER}" > data/version.txt
+          python3 - <<'PY'
+          import datetime
+          import json
+          from pathlib import Path
+
+          version = Path("data/version.txt").read_text(encoding="utf-8").strip()
+          payload = json.loads(
+              Path("data/leaderboard-live.json").read_text(encoding="utf-8")
+          )
+          meta = {
+              "version": version,
+              "updated_at": datetime.datetime.now(datetime.UTC)
+              .replace(microsecond=0)
+              .isoformat()
+              .replace("+00:00", "Z"),
+              "source": (
+                  "https://deepswe.datacurve.ai/artifacts/"
+                  f"{version}/leaderboard-live.json"
+              ),
+              "generated_at": payload.get("generated_at"),
+              "n_tasks_in_set": payload.get("n_tasks_in_set"),
+              "n_rows": len(payload.get("rows") or []),
+          }
+          Path("data/meta.json").write_text(
+              json.dumps(meta, indent=2) + "\n", encoding="utf-8"
+          )
+          print(json.dumps(meta, indent=2))
+          PY
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/leaderboard-live.json data/version.txt data/meta.json
+          if git diff --staged --quiet; then
+            echo "no changes"
+          else
+            git commit -m "chore: update leaderboard $(cat data/version.txt)"
+            git push
+          fi
