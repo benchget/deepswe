@@ -21,7 +21,14 @@ https://raw.githubusercontent.com/benchget/deepswe/main/data/meta.json
 ## Client
 
 ```bash
+# Read mirror metadata
 python fetch.py
+
+# Query live DeepSWE directly
+python fetch.py --live
+
+# Update local mirror files
+python fetch.py --update
 ```
 
 Optional env:
@@ -33,8 +40,7 @@ Optional env:
 
 GitHub Actions runs daily at 06:00 UTC (`workflow_dispatch` supported).
 
-Version is resolved with sequential `HEAD` requests over:
+Version is resolved dynamically from `https://deepswe.datacurve.ai/` via URL/artifact detection with fallback probes over:
 
 `v1.1` → `v1` → `v1.2` → `v2` → `v1.0`
 
-First `200` wins. Prepend new versions to the candidate list in the workflow when needed.
