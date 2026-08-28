@@ -1,11 +1,11 @@
 {
   "scope": "Every DeepSWE rollout across imported Pier jobs, grouped by configuration (harness + model + reasoning effort)",
   "unit": "pass@1 is attempt pass rate over scored rollout attempts. pass@4 is tasks with at least one passing rollout divided by tasks attempted. Context-window failures and agent timeouts are scored failures; provider/verifier/network errors are excluded. Efficiency aggregates are over every scored attempt.",
-  "generated_at": "2026-08-20T07:48:24.252395+00:00",
+  "generated_at": "2026-08-26T07:38:24.821609+00:00",
   "n_tasks_in_set": 113,
   "latest_job": {
-    "name": "20260818-glm-5.3",
-    "finished_at": "2026-08-20T07:35:00.619175"
+    "name": "20260825-deep-swe-glm-5-3-flash",
+    "finished_at": null
   },
   "rows": [
     {
@@ -755,6 +755,40 @@
       "median_agent_steps": 60.0,
       "median_peak_context_tokens": 107945.5,
       "median_output_tokens_to_pass": 30122.0
+    },
+    {
+      "model": "glm-5-3-flash",
+      "harness": "mini-swe-agent",
+      "reasoning_effort": "max",
+      "config": "mini_swe_agent_glm_5_3_flash_max",
+      "source": "deep-swe",
+      "pass_rate": 0.6339285714285714,
+      "pass_at_1": 0.6339285714285714,
+      "pass_at_4": 0.8495575221238938,
+      "n_passed": 284,
+      "n_attempted": 448,
+      "n_tasks_attempted": 113,
+      "n_tasks_passed_any": 96,
+      "ci_passed": 284,
+      "ci_attempted": 448,
+      "ci_lo": 0.590148863911635,
+      "ci_hi": 0.6777082789455078,
+      "ci_half": 0.04377970751693644,
+      "n_runs": 4,
+      "ci_method": "95% run-to-run: SE across repeated whole-benchmark passes (1.96 * std(runs)/sqrt(R))",
+      "mean_cost_usd": 0.48196371245535713,
+      "median_cost_usd": 0.389975125,
+      "mean_output_tokens": 72829.77008928571,
+      "median_output_tokens": 67491.0,
+      "mean_input_tokens": 12387025.401785715,
+      "median_input_tokens": 9358476.5,
+      "mean_cache_tokens": 11770874.857142856,
+      "mean_duration_seconds": 1537.7995419129463,
+      "median_duration_seconds": 1322.635727,
+      "mean_agent_steps": 122.890625,
+      "median_agent_steps": 110.0,
+      "median_peak_context_tokens": 136183.5,
+      "median_output_tokens_to_pass": 68067.5
     },
     {
       "model": "deepseek-v4-pro",

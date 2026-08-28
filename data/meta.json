@@ -1,8 +1,8 @@
 {
   "version": "v1.1",
-  "updated_at": "2026-08-26T08:08:56Z",
+  "updated_at": "2026-08-28T21:28:29Z",
   "source": "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json",
-  "generated_at": "2026-08-20T07:48:24.252395+00:00",
+  "generated_at": "2026-08-26T07:38:24.821609+00:00",
   "n_tasks_in_set": 113,
-  "n_rows": 62
+  "n_rows": 63
 }
