@@ -1,0 +1,13 @@
+{
+  "v1.1": {
+    "gpt-5-6-luna": {
+      "multiplier": 0.2015,
+      "min_raw_cost": 1.5,
+      "reason": "post-v1.1 price cut; runs already priced below the threshold were measured after the cut"
+    },
+    "gpt-5-6-terra": {
+      "multiplier": 0.8,
+      "reason": "post-v1.1 price cut"
+    }
+  }
+}

@@ -112,6 +112,58 @@ def fetch_live_leaderboard(
     return json.loads(raw.decode("utf-8"))
 
 
+def load_corrections(data_dir: str | Path = "data") -> dict[str, Any]:
+    """Load price corrections from corrections.json if it exists."""
+    corrections_path = Path(data_dir) / "corrections.json"
+    if corrections_path.exists():
+        try:
+            return json.loads(corrections_path.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+def apply_corrections(
+    payload: dict[str, Any],
+    version: str,
+    corrections: dict[str, Any],
+) -> dict[str, Any]:
+    """Apply price corrections to leaderboard rows based on version and model."""
+    if version not in corrections:
+        return payload
+    
+    version_corrections = corrections[version]
+    rows = payload.get("rows", [])
+    
+    for row in rows:
+        model = row.get("model")
+        if model not in version_corrections:
+            continue
+        
+        correction = version_corrections[model]
+        multiplier = correction.get("multiplier", 1.0)
+        min_raw_cost = correction.get("min_raw_cost")
+        
+        # Apply corrections to cost fields
+        if "mean_cost_usd" in row:
+            original_cost = row["mean_cost_usd"]
+            # Apply min_raw_cost threshold if specified
+            if min_raw_cost is not None and original_cost >= min_raw_cost:
+                row["mean_cost_usd"] = original_cost * multiplier
+            elif min_raw_cost is None:
+                row["mean_cost_usd"] = original_cost * multiplier
+        
+        if "median_cost_usd" in row:
+            original_cost = row["median_cost_usd"]
+            # Apply min_raw_cost threshold if specified
+            if min_raw_cost is not None and original_cost >= min_raw_cost:
+                row["median_cost_usd"] = original_cost * multiplier
+            elif min_raw_cost is None:
+                row["median_cost_usd"] = original_cost * multiplier
+    
+    return payload
+
+
 def update_mirror(
     data_dir: str | Path = "data",
     base_url: str = BASE_URL,
@@ -124,8 +176,14 @@ def update_mirror(
     url = leaderboard_url(version=ver, base_url=base_url)
     raw_payload = _http_get(url, timeout=60.0)
     payload = json.loads(raw_payload.decode("utf-8"))
+    
+    # Load and apply corrections
+    corrections = load_corrections(target_dir)
+    payload = apply_corrections(payload, ver, corrections)
 
-    (target_dir / "leaderboard-live.json").write_bytes(raw_payload)
+    (target_dir / "leaderboard-live.json").write_bytes(
+        json.dumps(payload, indent=2).encode("utf-8")
+    )
     (target_dir / "version.txt").write_text(f"{ver}\n", encoding="utf-8")
 
     meta_info: dict[str, Any] = {
