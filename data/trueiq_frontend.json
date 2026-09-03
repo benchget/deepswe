@@ -1,0 +1,1065 @@
+{
+  "meta": {
+    "generated_at": "2026-09-02T15:18:19Z",
+    "n_tasks_in_set": 113,
+    "n_models": 27,
+    "n_runs": 65
+  },
+  "models": [
+    {
+      "model_id": "claude-opus-5",
+      "trueiq": 73.49559135780494,
+      "conservative_score": 73.43681924813498,
+      "profile_q": 73.49559135780494,
+      "peak_p1": 73.64864864864865,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "THRESHOLDED",
+      "top_efficiency": "OVERTHINKING",
+      "evidence": "STABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 35.641425389755014,
+          "out_tokens": 19884.3140311804,
+          "cost": 1.6626223919821828,
+          "duration": 468.87542417149217,
+          "run_q": 58.12917594654788,
+          "pass1": 58.12917594654788,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "medium",
+          "steps": 52.29530201342282,
+          "out_tokens": 36981.530201342284,
+          "cost": 3.28978764541387,
+          "duration": 759.2254874630873,
+          "run_q": 68.90380313199105,
+          "pass1": 68.90380313199105,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "high",
+          "steps": 72.92204899777283,
+          "out_tokens": 64207.43429844098,
+          "cost": 6.076084489977728,
+          "duration": 1163.8627881514476,
+          "run_q": 72.82850779510022,
+          "pass1": 72.82850779510022,
+          "run_note": "DEEP-STEPS"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 88.7248322147651,
+          "out_tokens": 91672.01565995526,
+          "cost": 9.07220232326622,
+          "duration": 1559.5597273221476,
+          "run_q": 73.15436241610739,
+          "pass1": 73.15436241610739,
+          "run_note": "DEEP-STEPS"
+        },
+        {
+          "effort": "max",
+          "steps": 99.0427927927928,
+          "out_tokens": 117565.6936936937,
+          "cost": 11.837583271396396,
+          "duration": 1911.819866231982,
+          "run_q": 73.64864864864865,
+          "pass1": 73.64864864864865,
+          "run_note": "DEEP-STEPS"
+        }
+      ]
+    },
+    {
+      "model_id": "gpt-5-6-sol",
+      "trueiq": 71.8733256643709,
+      "conservative_score": 71.66022679852705,
+      "profile_q": 71.8733256643709,
+      "peak_p1": 72.66666666666667,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "THRESHOLDED",
+      "top_efficiency": "OVERTHINKING",
+      "evidence": "STABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 23.358407079646017,
+          "out_tokens": 10579.141592920354,
+          "cost": 1.0742664646017699,
+          "duration": 262.2510164579646,
+          "run_q": 45.35398230088495,
+          "pass1": 45.35398230088495,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "medium",
+          "steps": 30.913716814159294,
+          "out_tokens": 18425.216814159292,
+          "cost": 1.8620318075221238,
+          "duration": 423.3752944181416,
+          "run_q": 61.06194690265486,
+          "pass1": 61.06194690265486,
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "high",
+          "steps": 36.889135254988915,
+          "out_tokens": 28450.31929046563,
+          "cost": 3.4698331108647453,
+          "duration": 594.230510789357,
+          "run_q": 69.40133037694012,
+          "pass1": 69.40133037694012,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 44.0,
+          "out_tokens": 40744.59201773836,
+          "cost": 4.703663860310422,
+          "duration": 800.5459875388026,
+          "run_q": 70.73170731707317,
+          "pass1": 70.73170731707317,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "max",
+          "steps": 61.25333333333333,
+          "out_tokens": 60013.64444444444,
+          "cost": 8.386436346666667,
+          "duration": 1128.624910331111,
+          "run_q": 72.66666666666667,
+          "pass1": 72.66666666666667,
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "claude-fable-5",
+      "trueiq": 69.71739215604828,
+      "conservative_score": 69.65418511897907,
+      "profile_q": 69.71739215604828,
+      "peak_p1": 69.91150442477876,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "SURGICAL",
+      "effort_response": "SATURATING",
+      "top_efficiency": "OVERTHINKING",
+      "evidence": "STABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 37.79907621247113,
+          "out_tokens": 25242.833718244805,
+          "cost": 3.757873125874126,
+          "duration": 634.7057336951501,
+          "run_q": 59.58429561200924,
+          "pass1": 59.58429561200924,
+          "run_note": "DEEP-STEPS+DELIBERATE"
+        },
+        {
+          "effort": "medium",
+          "steps": 48.36697247706422,
+          "out_tokens": 40201.35321100918,
+          "cost": 6.088186528935186,
+          "duration": 810.8967150733945,
+          "run_q": 65.36697247706422,
+          "pass1": 65.36697247706422,
+          "run_note": "DEEP-STEPS"
+        },
+        {
+          "effort": "high",
+          "steps": 58.73720930232558,
+          "out_tokens": 57287.06976744186,
+          "cost": 9.177638214788733,
+          "duration": 1062.3037221116278,
+          "run_q": 68.6046511627907,
+          "pass1": 68.6046511627907,
+          "run_note": "DEEP-STEPS"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 68.40044247787611,
+          "out_tokens": 80352.1703539823,
+          "cost": 13.414521495535714,
+          "duration": 1411.5830643938054,
+          "run_q": 69.91150442477876,
+          "pass1": 69.91150442477876,
+          "run_note": "DEEP-STEPS"
+        },
+        {
+          "effort": "max",
+          "steps": 88.4288990825688,
+          "out_tokens": 118592.77293577982,
+          "cost": 21.634702092592594,
+          "duration": 2092.0106240022938,
+          "run_q": 69.72477064220183,
+          "pass1": 69.72477064220183,
+          "run_note": "DEEP-STEPS"
+        }
+      ]
+    },
+    {
+      "model_id": "glm-5-3",
+      "trueiq": 68.98829175087809,
+      "conservative_score": 68.95787139689578,
+      "profile_q": 68.98829175087809,
+      "peak_p1": 68.95787139689578,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "max",
+          "steps": 124.47228381374723,
+          "out_tokens": 80435.60975609756,
+          "cost": 3.9933584893126386,
+          "duration": 2116.1784804168515,
+          "run_q": 68.95787139689578,
+          "pass1": 68.95787139689578,
+          "run_note": "DELIBERATE"
+        }
+      ]
+    },
+    {
+      "model_id": "kimi-k3",
+      "trueiq": 68.63332834605498,
+      "conservative_score": 68.51441241685144,
+      "profile_q": 68.63332834605498,
+      "peak_p1": 68.51441241685144,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "FIXED-EFFORT",
+      "top_efficiency": "FIXED-RUN",
+      "evidence": "FIXED-EFFORT",
+      "runs": [
+        {
+          "effort": "max",
+          "steps": 97.58758314855876,
+          "out_tokens": 81499.84257206209,
+          "cost": 4.654682129933482,
+          "duration": 4541.447376412417,
+          "run_q": 68.51441241685144,
+          "pass1": 68.51441241685144,
+          "run_note": "DELIBERATE"
+        }
+      ]
+    },
+    {
+      "model_id": "grok-4-6",
+      "trueiq": 66.78691208112994,
+      "conservative_score": 66.64833799306604,
+      "profile_q": 66.78691208112994,
+      "peak_p1": 67.47787610619469,
+      "n_efforts": 4,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SATURATING",
+      "top_efficiency": "OVERTHINKING",
+      "evidence": "STABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 44.18708240534521,
+          "out_tokens": 16458.3429844098,
+          "cost": 1.0423604231625836,
+          "duration": 325.05958362360803,
+          "run_q": 41.648106904231625,
+          "pass1": 41.648106904231625,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "medium",
+          "steps": 70.28982300884955,
+          "out_tokens": 49763.99778761062,
+          "cost": 3.4489837522123894,
+          "duration": 895.5380579646018,
+          "run_q": 67.47787610619469,
+          "pass1": 67.47787610619469,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "high",
+          "steps": 78.960088691796,
+          "out_tokens": 61160.94456762749,
+          "cost": 4.3848732239467845,
+          "duration": 1083.6365204833703,
+          "run_q": 65.18847006651885,
+          "pass1": 65.18847006651885,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 87.21951219512195,
+          "out_tokens": 71403.54323725056,
+          "cost": 5.497668745011087,
+          "duration": 1272.3478393858093,
+          "run_q": 66.74057649667405,
+          "pass1": 66.74057649667405,
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "gpt-5-6-terra",
+      "trueiq": 66.06868120383493,
+      "conservative_score": 64.95519590827121,
+      "profile_q": 66.06868120383493,
+      "peak_p1": 69.62305986696231,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "STEADY-SCALER",
+      "top_efficiency": "SCALING",
+      "evidence": "VARIABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 21.456570155902003,
+          "out_tokens": 8572.26280623608,
+          "cost": 0.3421962084632517,
+          "duration": 176.52513473942093,
+          "run_q": 24.053452115812917,
+          "pass1": 24.053452115812917,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "medium",
+          "steps": 25.14666666666667,
+          "out_tokens": 11746.56,
+          "cost": 0.46659949511111115,
+          "duration": 229.60274282444442,
+          "run_q": 35.11111111111111,
+          "pass1": 35.11111111111111,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "high",
+          "steps": 33.51327433628319,
+          "out_tokens": 21517.03982300885,
+          "cost": 0.907501021238938,
+          "duration": 364.2859819269911,
+          "run_q": 53.76106194690266,
+          "pass1": 53.76106194690266,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 43.06637168141593,
+          "out_tokens": 39616.53982300885,
+          "cost": 1.7017533805309737,
+          "duration": 584.0832282876107,
+          "run_q": 60.17699115044248,
+          "pass1": 60.17699115044248,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "max",
+          "steps": 75.9290465631929,
+          "out_tokens": 71938.62527716186,
+          "cost": 3.956677811086475,
+          "duration": 1016.6698429312638,
+          "run_q": 69.62305986696231,
+          "pass1": 69.62305986696231,
+          "run_note": "FAST-LOOP"
+        }
+      ]
+    },
+    {
+      "model_id": "gpt-5-5",
+      "trueiq": 65.07632940897598,
+      "conservative_score": 64.43109177465233,
+      "profile_q": 65.07632940897598,
+      "peak_p1": 67.03539823008849,
+      "n_efforts": 4,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "THRESHOLDED",
+      "top_efficiency": "OVERTHINKING",
+      "evidence": "VARIABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 28.06637168141593,
+          "out_tokens": 9442.774336283186,
+          "cost": 1.2002025442477877,
+          "duration": 569.9958436615044,
+          "run_q": 26.991150442477874,
+          "pass1": 26.991150442477874,
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "medium",
+          "steps": 45.982300884955755,
+          "out_tokens": 19625.433628318584,
+          "cost": 2.749342734513274,
+          "duration": 1288.995063800885,
+          "run_q": 53.98230088495575,
+          "pass1": 53.98230088495575,
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "high",
+          "steps": 61.924778761061944,
+          "out_tokens": 31159.49778761062,
+          "cost": 5.100437004424779,
+          "duration": 2048.0589126172567,
+          "run_q": 64.38053097345133,
+          "pass1": 64.38053097345133,
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 82.01548672566372,
+          "out_tokens": 46294.72345132743,
+          "cost": 7.226236674778761,
+          "duration": 1806.3251869889382,
+          "run_q": 67.03539823008849,
+          "pass1": 67.03539823008849,
+          "run_note": "DELIBERATE"
+        }
+      ]
+    },
+    {
+      "model_id": "glm-5-3-flash",
+      "trueiq": 63.37626422250316,
+      "conservative_score": 63.359671302149174,
+      "profile_q": 63.37626422250316,
+      "peak_p1": 63.39285714285714,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "max",
+          "steps": 122.890625,
+          "out_tokens": 72829.77008928571,
+          "cost": 0.48196371245535713,
+          "duration": 1537.7995419129463,
+          "run_q": 63.39285714285714,
+          "pass1": 63.39285714285714,
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "deepseek-v4-pro",
+      "trueiq": 62.99225663716814,
+      "conservative_score": 62.83185840707964,
+      "profile_q": 62.99225663716814,
+      "peak_p1": 62.83185840707964,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CHURNING",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "max",
+          "steps": 154.71238938053096,
+          "out_tokens": 105998.91814159292,
+          "cost": 0.24138687892256638,
+          "duration": 2212.510104011062,
+          "run_q": 62.83185840707964,
+          "pass1": 62.83185840707964,
+          "run_note": "STEP-HEAVY"
+        }
+      ]
+    },
+    {
+      "model_id": "gpt-5-6-luna",
+      "trueiq": 62.67508757374632,
+      "conservative_score": 61.22373801622419,
+      "profile_q": 62.67508757374632,
+      "peak_p1": 67.1875,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "THRESHOLDED",
+      "top_efficiency": "SCALING",
+      "evidence": "VARIABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 12.464601769911505,
+          "out_tokens": 3127.754424778761,
+          "cost": 0.07240623938053097,
+          "duration": 77.14656007522123,
+          "run_q": 1.5486725663716814,
+          "pass1": 1.5486725663716814,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "medium",
+          "steps": 23.67699115044248,
+          "out_tokens": 8179.570796460177,
+          "cost": 0.21630978982300886,
+          "duration": 181.5252541438053,
+          "run_q": 11.283185840707963,
+          "pass1": 11.283185840707963,
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "high",
+          "steps": 49.02212389380531,
+          "out_tokens": 25778.274336283186,
+          "cost": 0.7779007499999999,
+          "duration": 473.83880740929203,
+          "run_q": 44.24778761061947,
+          "pass1": 44.24778761061947,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 71.09955752212389,
+          "out_tokens": 44677.900442477876,
+          "cost": 0.30942728261969027,
+          "duration": 731.6846703871681,
+          "run_q": 56.85840707964602,
+          "pass1": 56.85840707964602,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "max",
+          "steps": 101.68080357142857,
+          "out_tokens": 73399.70758928571,
+          "cost": 0.6101655372689733,
+          "duration": 1122.9470243995536,
+          "run_q": 67.1875,
+          "pass1": 67.1875,
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "qwen3-8-max",
+      "trueiq": 57.537826965069414,
+      "conservative_score": 57.46102449888642,
+      "profile_q": 57.537826965069414,
+      "peak_p1": 57.46102449888642,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "COMPUTE-HEAVY",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "xhigh",
+          "steps": 111.33853006681514,
+          "out_tokens": 95075.18262806236,
+          "cost": 3.7290646500445437,
+          "duration": 2567.2746634654786,
+          "run_q": 57.46102449888642,
+          "pass1": 57.46102449888642,
+          "run_note": "STEP-HEAVY+DELIBERATE"
+        }
+      ]
+    },
+    {
+      "model_id": "claude-opus-4-8",
+      "trueiq": 57.19617812642254,
+      "conservative_score": 56.70615764487424,
+      "profile_q": 57.19617812642254,
+      "peak_p1": 58.97435897435898,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "STEADY-SCALER",
+      "top_efficiency": "DIMINISHING",
+      "evidence": "SUPPORTED",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 53.97782705099778,
+          "out_tokens": 28922.736141906873,
+          "cost": 2.293369216740577,
+          "duration": 651.8271712993347,
+          "run_q": 40.79822616407982,
+          "pass1": 40.79822616407982,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "medium",
+          "steps": 65.57300884955752,
+          "out_tokens": 41313.45132743363,
+          "cost": 3.4438571028761062,
+          "duration": 880.0083837986726,
+          "run_q": 48.67256637168141,
+          "pass1": 48.67256637168141,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "high",
+          "steps": 72.5,
+          "out_tokens": 50063.52654867257,
+          "cost": 4.281940017699115,
+          "duration": 1066.903783732301,
+          "run_q": 51.76991150442478,
+          "pass1": 51.76991150442478,
+          "run_note": "NORMAL-RUN"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 94.64429530201342,
+          "out_tokens": 86088.7874720358,
+          "cost": 8.006355704138702,
+          "duration": 2198.774075261745,
+          "run_q": 54.36241610738255,
+          "pass1": 54.36241610738255,
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "max",
+          "steps": 120.0,
+          "out_tokens": 135031.67132867133,
+          "cost": 13.222583593240094,
+          "duration": 3492.740812641026,
+          "run_q": 58.97435897435898,
+          "pass1": 58.97435897435898,
+          "run_note": "DEEP-STEPS"
+        }
+      ]
+    },
+    {
+      "model_id": "gemini-3-8-flash",
+      "trueiq": 55.56666768129714,
+      "conservative_score": 52.59084679574745,
+      "profile_q": 73.1140364227594,
+      "peak_p1": 73.8255033557047,
+      "n_efforts": 2,
+      "spam_strength": 1.0,
+      "interaction_style": "SPAMMER",
+      "effort_response": "STEADY-SCALER",
+      "top_efficiency": "EFFICIENT",
+      "evidence": "SUPPORTED",
+      "runs": [
+        {
+          "effort": "medium",
+          "steps": 147.30088495575222,
+          "out_tokens": 124684.36283185841,
+          "cost": 1.9671024789823006,
+          "duration": 826.5496385464602,
+          "run_q": 71.01769911504425,
+          "pass1": 71.01769911504425,
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+        },
+        {
+          "effort": "high",
+          "steps": 166.3131991051454,
+          "out_tokens": 143242.6644295302,
+          "cost": 2.362349413758389,
+          "duration": 686.7691519843399,
+          "run_q": 73.8255033557047,
+          "pass1": 73.8255033557047,
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+        }
+      ]
+    },
+    {
+      "model_id": "muse-spark-1-2",
+      "trueiq": 54.926253687315636,
+      "conservative_score": 54.86725663716814,
+      "profile_q": 54.926253687315636,
+      "peak_p1": 54.86725663716814,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CHURNING",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "xhigh",
+          "steps": 100.75884955752213,
+          "out_tokens": 99226.38053097345,
+          "cost": 3.6955048180309733,
+          "duration": 927.8692516349557,
+          "run_q": 54.86725663716814,
+          "pass1": 54.86725663716814,
+          "run_note": "MECHANICAL-CHURN+FAST-LOOP"
+        }
+      ]
+    },
+    {
+      "model_id": "grok-4-5",
+      "trueiq": 53.70417193426043,
+      "conservative_score": 53.64728192161821,
+      "profile_q": 53.70417193426043,
+      "peak_p1": 53.76106194690266,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "high",
+          "steps": 61.33185840707964,
+          "out_tokens": 35525.33185840708,
+          "cost": 2.4157481725663716,
+          "duration": 484.7029359800885,
+          "run_q": 53.76106194690266,
+          "pass1": 53.76106194690266,
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "deepseek-v4-flash",
+      "trueiq": 53.394437420986094,
+      "conservative_score": 53.31858407079646,
+      "profile_q": 53.394437420986094,
+      "peak_p1": 53.31858407079646,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CHURNING",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "max",
+          "steps": 152.87610619469027,
+          "out_tokens": 107687.02212389381,
+          "cost": 0.10023560370265487,
+          "duration": 1438.9961937522125,
+          "run_q": 53.31858407079646,
+          "pass1": 53.31858407079646,
+          "run_note": "STEP-HEAVY+FAST-LOOP"
+        }
+      ]
+    },
+    {
+      "model_id": "muse-spark-1-1",
+      "trueiq": 53.35018963337548,
+      "conservative_score": 53.31858407079646,
+      "profile_q": 53.35018963337548,
+      "peak_p1": 53.31858407079646,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CHURNING",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "xhigh",
+          "steps": 95.82522123893806,
+          "out_tokens": 74008.4203539823,
+          "cost": 2.361142644469026,
+          "duration": 897.5133296747788,
+          "run_q": 53.31858407079646,
+          "pass1": 53.31858407079646,
+          "run_note": "FAST-LOOP"
+        }
+      ]
+    },
+    {
+      "model_id": "claude-sonnet-5",
+      "trueiq": 52.41088573632282,
+      "conservative_score": 51.9784864452944,
+      "profile_q": 52.41088573632282,
+      "peak_p1": 53.84615384615385,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "COMPUTE-HEAVY",
+      "effort_response": "STEADY-SCALER",
+      "top_efficiency": "OVERTHINKING",
+      "evidence": "SUPPORTED",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 76.88864142538975,
+          "out_tokens": 35595.08240534521,
+          "cost": 2.1865550832962137,
+          "duration": 734.9105084298441,
+          "run_q": 30.51224944320713,
+          "pass1": 30.51224944320713,
+          "run_note": "STEP-HEAVY"
+        },
+        {
+          "effort": "medium",
+          "steps": 107.61111111111111,
+          "out_tokens": 56816.753333333334,
+          "cost": 4.079036229,
+          "duration": 1121.270593551111,
+          "run_q": 39.77777777777778,
+          "pass1": 39.77777777777778,
+          "run_note": "STEP-HEAVY"
+        },
+        {
+          "effort": "high",
+          "steps": 146.57649667405764,
+          "out_tokens": 87294.75609756098,
+          "cost": 7.425560161197339,
+          "duration": 1728.2193087920355,
+          "run_q": 48.23008849557522,
+          "pass1": 48.23008849557522,
+          "run_note": "STEP-HEAVY"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 185.53215077605321,
+          "out_tokens": 120698.59201773835,
+          "cost": 11.890634540022173,
+          "duration": 2414.4529098159646,
+          "run_q": 49.667405764966745,
+          "pass1": 49.667405764966745,
+          "run_note": "STEP-HEAVY"
+        },
+        {
+          "effort": "max",
+          "steps": 268.4547511312217,
+          "out_tokens": 214117.54977375566,
+          "cost": 26.399858950791852,
+          "duration": 4803.543157789592,
+          "run_q": 53.84615384615385,
+          "pass1": 53.84615384615385,
+          "run_note": "STEP-HEAVY"
+        }
+      ]
+    },
+    {
+      "model_id": "gemini-3-7-flash",
+      "trueiq": 52.29796527588351,
+      "conservative_score": 50.23337377665351,
+      "profile_q": 63.901319532237665,
+      "peak_p1": 65.48672566371681,
+      "n_efforts": 3,
+      "spam_strength": 0.8000000000000003,
+      "interaction_style": "SPAMMER",
+      "effort_response": "SATURATING",
+      "top_efficiency": "EFFICIENT",
+      "evidence": "VARIABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 130.37610619469027,
+          "out_tokens": 73364.9557522124,
+          "cost": 1.8322645629424779,
+          "duration": 1252.0731730707964,
+          "run_q": 53.76106194690266,
+          "pass1": 53.76106194690266,
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+        },
+        {
+          "effort": "medium",
+          "steps": 117.36946902654867,
+          "out_tokens": 93990.8517699115,
+          "cost": 2.0251351826880533,
+          "duration": 1240.376194079646,
+          "run_q": 65.48672566371681,
+          "pass1": 65.48672566371681,
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+        },
+        {
+          "effort": "high",
+          "steps": 124.51548672566372,
+          "out_tokens": 107248.30309734514,
+          "cost": 2.1762860351216813,
+          "duration": 1244.9565387986725,
+          "run_q": 65.2654867256637,
+          "pass1": 65.2654867256637,
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+        }
+      ]
+    },
+    {
+      "model_id": "gpt-5-4",
+      "trueiq": 51.76991150442478,
+      "conservative_score": 51.76991150442478,
+      "profile_q": 51.76991150442478,
+      "peak_p1": 51.76991150442478,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "xhigh",
+          "steps": 70.47123893805309,
+          "out_tokens": 71408.87389380531,
+          "cost": 5.6524577245575225,
+          "duration": 1368.707164818584,
+          "run_q": 51.76991150442478,
+          "pass1": 51.76991150442478,
+          "run_note": "DEEP-STEPS"
+        }
+      ]
+    },
+    {
+      "model_id": "gemini-3-6-flash",
+      "trueiq": 46.68141592920354,
+      "conservative_score": 46.68141592920354,
+      "profile_q": 46.68141592920354,
+      "peak_p1": 46.68141592920354,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "high",
+          "steps": 116.73333333333333,
+          "out_tokens": 95844.86222222222,
+          "cost": 4.419013277333334,
+          "duration": 1477.8607510707964,
+          "run_q": 46.68141592920354,
+          "pass1": 46.68141592920354,
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "glm-5-2",
+      "trueiq": 42.24047197640118,
+      "conservative_score": 41.862281219272376,
+      "profile_q": 42.24047197640118,
+      "peak_p1": 43.77777777777778,
+      "n_efforts": 2,
+      "spam_strength": 0.0,
+      "interaction_style": "COMPUTE-HEAVY",
+      "effort_response": "EFFORT-HUNGRY",
+      "top_efficiency": "SCALING",
+      "evidence": "SUPPORTED",
+      "runs": [
+        {
+          "effort": "high",
+          "steps": 121.88274336283186,
+          "out_tokens": 54245.50442477876,
+          "cost": 2.8355164725663715,
+          "duration": 1794.4733617809734,
+          "run_q": 36.283185840707965,
+          "pass1": 36.283185840707965,
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "max",
+          "steps": 129.12666666666667,
+          "out_tokens": 78175.30666666667,
+          "cost": 3.9199075743111114,
+          "duration": 2629.2083211311115,
+          "run_q": 43.77777777777778,
+          "pass1": 43.77777777777778,
+          "run_note": "DELIBERATE"
+        }
+      ]
+    },
+    {
+      "model_id": "gemini-3-5-flash",
+      "trueiq": 36.06194690265487,
+      "conservative_score": 36.06194690265487,
+      "profile_q": 36.06194690265487,
+      "peak_p1": 36.06194690265487,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "high",
+          "steps": 105.30376940133037,
+          "out_tokens": 75730.19290465632,
+          "cost": 3.4467114588691796,
+          "duration": 1125.1601607057523,
+          "run_q": 36.06194690265487,
+          "pass1": 36.06194690265487,
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "kimi-k2-7-code",
+      "trueiq": 30.55309734513274,
+      "conservative_score": 30.53097345132743,
+      "profile_q": 30.55309734513274,
+      "peak_p1": 30.53097345132743,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "COMPUTE-HEAVY",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "none",
+          "steps": 149.1150442477876,
+          "out_tokens": 59297.24778761062,
+          "cost": 2.815536243274336,
+          "duration": 2163.7950712809734,
+          "run_q": 30.53097345132743,
+          "pass1": 30.53097345132743,
+          "run_note": "STEP-HEAVY+DELIBERATE"
+        }
+      ]
+    },
+    {
+      "model_id": "claude-sonnet-4-6",
+      "trueiq": 29.933481152993345,
+      "conservative_score": 29.933481152993345,
+      "profile_q": 29.933481152993345,
+      "peak_p1": 29.933481152993345,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "COMPUTE-HEAVY",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "high",
+          "steps": 133.65853658536585,
+          "out_tokens": 76160.31263858093,
+          "cost": 5.5223517987804875,
+          "duration": 2815.01307943459,
+          "run_q": 29.933481152993345,
+          "pass1": 29.933481152993345,
+          "run_note": "STEP-HEAVY+DELIBERATE"
+        }
+      ]
+    },
+    {
+      "model_id": "gemini-3-1-pro-preview",
+      "trueiq": 11.725663716814159,
+      "conservative_score": 11.725663716814159,
+      "profile_q": 11.725663716814159,
+      "peak_p1": 11.725663716814159,
+      "n_efforts": 1,
+      "spam_strength": 0.0,
+      "interaction_style": "CLEAN",
+      "effort_response": "SINGLE-SETTING",
+      "top_efficiency": "SINGLE-RUN",
+      "evidence": "SINGLE-SETTING",
+      "runs": [
+        {
+          "effort": "high",
+          "steps": 75.56444444444445,
+          "out_tokens": 28368.884444444444,
+          "cost": 2.1434045568888886,
+          "duration": 867.7979107013274,
+          "run_q": 11.725663716814159,
+          "pass1": 11.725663716814159,
+          "run_note": "DELIBERATE"
+        }
+      ]
+    }
+  ]
+}
