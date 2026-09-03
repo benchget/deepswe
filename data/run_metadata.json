@@ -1,0 +1,146 @@
+{
+  "input": "data/leaderboard-live.json",
+  "outdir": "data",
+  "config": {
+    "effort_order": {
+      "low": 0,
+      "medium": 1,
+      "high": 2,
+      "xhigh": 3,
+      "max": 4,
+      "default": 2,
+      "none": 2,
+      "": 2
+    },
+    "profile_peak_weights": [
+      0.35,
+      0.45,
+      0.55
+    ],
+    "upper_weight_shapes": [
+      [
+        0.2,
+        0.3,
+        0.5
+      ],
+      [
+        0.25,
+        0.35,
+        0.4
+      ]
+    ],
+    "breadth_weights": [
+      0.0,
+      0.05,
+      0.1
+    ],
+    "spam_tax_caps": [
+      0.2,
+      0.24,
+      0.28
+    ],
+    "spam_power": 1.25,
+    "spam_pct_lo": 0.7,
+    "spam_pct_hi": 0.95,
+    "spam_run_gate": 0.25,
+    "spam_min_efforts": 2,
+    "spam_persistence_min": 0.5,
+    "hunger_top_gain_pp": 5.0,
+    "hunger_relative_to_max_gain": 0.6,
+    "saturation_top_gain_pp": 3.0,
+    "threshold_spike_ratio": 2.2,
+    "flat_gain_pp": 2.5,
+    "overthink_work_log_gain": 0.22,
+    "overthink_gain_pp": 1.5,
+    "efficient_gain_per_logwork": 8.0,
+    "stable_top3_range_pp": 4.0,
+    "variable_top3_range_pp": 8.0,
+    "stable_ci_half_pp": 4.0,
+    "surgeon_capability_pct": 0.7,
+    "surgeon_steps_pct_max": 0.4,
+    "surgeon_depth_pct_min": 0.6,
+    "surgeon_delib_floor_pct": 0.25,
+    "compute_heavy_steps_pct": 0.75,
+    "compute_heavy_delib_pct": 0.55,
+    "bootstrap_samples": 0,
+    "bootstrap_seed": 1337,
+    "diagnostic_rf_estimators": 500,
+    "random_state": 42
+  },
+  "model_modes": {
+    "kimi-k3": "fixed"
+  },
+  "n_runs": 65,
+  "n_models": 27,
+  "diagnostic_ml": {
+    "available": true,
+    "used_in_score": false,
+    "warning": "Diagnostic only. Small-N ML is not trusted as a scorer.",
+    "group_cv_mae": 8.573962028750248,
+    "group_cv_r2": 0.5003443509463386,
+    "rf_importance": [
+      {
+        "feature": "tokens_per_step",
+        "importance": 0.3159684639244538
+      },
+      {
+        "feature": "steps_per_100k_out",
+        "importance": 0.2558865230249702
+      },
+      {
+        "feature": "cache_ratio",
+        "importance": 0.16887794960397678
+      },
+      {
+        "feature": "context_per_step",
+        "importance": 0.1163896513511856
+      },
+      {
+        "feature": "input_per_step",
+        "importance": 0.03609051579304398
+      },
+      {
+        "feature": "sec_per_step",
+        "importance": 0.021640413734153673
+      },
+      {
+        "feature": "sec_per_1k_out",
+        "importance": 0.01689728257787303
+      },
+      {
+        "feature": "duration",
+        "importance": 0.015238406642504556
+      },
+      {
+        "feature": "peak_context",
+        "importance": 0.014669227618897097
+      },
+      {
+        "feature": "cost",
+        "importance": 0.014092777383622563
+      },
+      {
+        "feature": "out_tokens",
+        "importance": 0.009790246113527227
+      },
+      {
+        "feature": "steps",
+        "importance": 0.008065386088179393
+      },
+      {
+        "feature": "input_tokens",
+        "importance": 0.00639315614361183
+      }
+    ],
+    "pca_explained_variance": [
+      0.4400756455781878,
+      0.27084155888917066,
+      0.13171614960915534,
+      0.07187013508967213,
+      0.04271262852876001
+    ]
+  },
+  "score_used_ml": false,
+  "point_score_random": false,
+  "bootstrap_affects_point_rank": false
+}

@@ -936,11 +936,14 @@ class Diagnostics:
 
 
 # -----------------------------------------------------------------------------
-# Run notes
+# Run notes and Run-level phenotype engine
 # -----------------------------------------------------------------------------
 
 
 class RunNoteEngine:
+    def __init__(self, cfg: Config):
+        self.cfg = cfg
+
     def apply(self, runs: pd.DataFrame, models: pd.DataFrame) -> pd.DataFrame:
         out = runs.copy()
         mi = models.set_index("model")
@@ -960,7 +963,7 @@ class RunNoteEngine:
             n_efforts = int(m["n_efforts"])
 
             prev_q = None
-            prev_steps = None
+            prev_work = None
 
             for idx, r in g.sort_values("effort_num").iterrows():
                 run_q = r["pass1"]
@@ -971,18 +974,24 @@ class RunNoteEngine:
                 total_unc = math.sqrt(run_ci**2 + epistemic_unc**2)
                 run_cons = run_trueiq - 0.84 * total_unc
 
-                if r["spam_run_strength"] >= 0.70:
+                if r["spam_run_strength"] >= 0.60:
                     style = "SPAMMER"
-                elif r["pct_steps"] >= 0.75:
-                    style = "CHURNING"
                 elif (
-                    run_q >= 65.0
-                    and r["pct_steps"] <= 0.40
-                    and r["pct_tokens_per_step"] >= 0.60
+                    run_q >= 60.0
+                    and r["pct_steps"] <= self.cfg.surgeon_steps_pct_max
+                    and r["pct_tokens_per_step"] >= self.cfg.surgeon_depth_pct_min
                 ):
                     style = "SURGICAL"
-                elif r["pct_steps"] >= 0.60 and r["pct_sec_per_1k_out"] >= 0.70:
+                elif (
+                    r["pct_steps"] >= self.cfg.compute_heavy_steps_pct
+                    and r["pct_sec_per_1k_out"] >= self.cfg.compute_heavy_delib_pct
+                ):
                     style = "COMPUTE-HEAVY"
+                elif (
+                    r["pct_steps"] >= self.cfg.compute_heavy_steps_pct
+                    or r["spam_run_strength"] >= 0.35
+                ):
+                    style = "CHURNING"
                 else:
                     style = "CLEAN"
 
@@ -990,18 +999,23 @@ class RunNoteEngine:
                     eff = "BASELINE"
                 else:
                     dq = run_q - prev_q
-                    dsteps = r["steps"] - prev_steps
-                    if dsteps >= 14.0 and dq < 1.5:
-                        eff = "OVERTHINKING"
-                    elif dq < -1.0:
+                    dwork = (
+                        (r["work_z"] - prev_work)
+                        if (prev_work is not None and np.isfinite(r["work_z"]))
+                        else 0.0
+                    )
+
+                    if dq < -1.0:
                         eff = "REGRESSION"
+                    elif dwork >= self.cfg.overthink_work_log_gain and dq < 1.5:
+                        eff = "OVERTHINKING"
                     elif dq >= 3.0:
                         eff = "SCALING"
                     else:
                         eff = "EFFICIENT"
 
                 prev_q = run_q
-                prev_steps = r["steps"]
+                prev_work = r["work_z"]
 
                 parts = []
                 if r["spam_run_strength"] >= 0.60:
@@ -1029,7 +1043,7 @@ class RunNoteEngine:
 
 
 # -----------------------------------------------------------------------------
-# Reporting
+# Reporting & Frontend Exporter
 # -----------------------------------------------------------------------------
 
 
@@ -1140,7 +1154,7 @@ class TrueIQSmallN:
 
         models = ModelBuilder(self.cfg, self.model_modes).build(runs)
         models, specs = SpecificationScorer(self.cfg).score(runs, models)
-        runs = RunNoteEngine().apply(runs, models)
+        runs = RunNoteEngine(self.cfg).apply(runs, models)
 
         boot, pairs = BootstrapLab(self.cfg).run(runs, models)
         if len(boot):
