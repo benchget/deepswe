@@ -86,7 +86,7 @@
           "run_trueiq": 73.64864864864865,
           "run_conservative": 69.89254395898078,
           "interaction_style": "SURGICAL",
-          "run_efficiency": "EFFICIENT",
+          "run_efficiency": "OVERTHINKING",
           "run_note": "DEEP-STEPS"
         }
       ]
@@ -157,7 +157,7 @@
           "run_trueiq": 70.73170731707317,
           "run_conservative": 68.73135282465219,
           "interaction_style": "SURGICAL",
-          "run_efficiency": "EFFICIENT",
+          "run_efficiency": "OVERTHINKING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -242,7 +242,7 @@
           "run_trueiq": 69.91150442477876,
           "run_conservative": 66.6012766086726,
           "interaction_style": "SURGICAL",
-          "run_efficiency": "EFFICIENT",
+          "run_efficiency": "OVERTHINKING",
           "run_note": "DEEP-STEPS"
         },
         {
@@ -284,7 +284,7 @@
           "pass1": 68.95787139689578,
           "run_trueiq": 68.95787139689578,
           "run_conservative": 64.05179277132382,
-          "interaction_style": "COMPUTE-HEAVY",
+          "interaction_style": "CLEAN",
           "run_efficiency": "BASELINE",
           "run_note": "DELIBERATE"
         }
@@ -712,7 +712,7 @@
           "pass1": 57.46102449888642,
           "run_trueiq": 57.46102449888642,
           "run_conservative": 52.70255499969807,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY+DELIBERATE"
         }
@@ -755,7 +755,7 @@
           "pass1": 48.67256637168141,
           "run_trueiq": 48.67256637168141,
           "run_conservative": 46.014388675578594,
-          "interaction_style": "COMPUTE-HEAVY",
+          "interaction_style": "CLEAN",
           "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
@@ -783,7 +783,7 @@
           "pass1": 54.36241610738255,
           "run_trueiq": 54.36241610738255,
           "run_conservative": 50.72127363610581,
-          "interaction_style": "COMPUTE-HEAVY",
+          "interaction_style": "CLEAN",
           "run_efficiency": "EFFICIENT",
           "run_note": "DELIBERATE"
         },
@@ -1013,7 +1013,7 @@
           "pass1": 48.23008849557522,
           "run_trueiq": 48.23008849557522,
           "run_conservative": 44.00438972620738,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "SCALING",
           "run_note": "STEP-HEAVY"
         },
@@ -1027,7 +1027,7 @@
           "pass1": 49.667405764966745,
           "run_trueiq": 49.667405764966745,
           "run_conservative": 46.21073597974675,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "OVERTHINKING",
           "run_note": "STEP-HEAVY"
         },
@@ -1041,7 +1041,7 @@
           "pass1": 53.84615384615385,
           "run_trueiq": 53.84615384615385,
           "run_conservative": 49.82190845040003,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "SCALING",
           "run_note": "STEP-HEAVY"
         }
@@ -1185,7 +1185,7 @@
           "pass1": 36.283185840707965,
           "run_trueiq": 36.283185840707965,
           "run_conservative": 31.309194587371948,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "BASELINE",
           "run_note": "DELIBERATE"
         },
@@ -1199,7 +1199,7 @@
           "pass1": 43.77777777777778,
           "run_trueiq": 43.77777777777778,
           "run_conservative": 40.473063875230736,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "SCALING",
           "run_note": "DELIBERATE"
         }
@@ -1257,7 +1257,7 @@
           "pass1": 30.53097345132743,
           "run_trueiq": 30.53097345132743,
           "run_conservative": 26.309967003428667,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY+DELIBERATE"
         }
@@ -1286,7 +1286,7 @@
           "pass1": 29.933481152993345,
           "run_trueiq": 29.933481152993345,
           "run_conservative": 24.50616970165431,
-          "interaction_style": "CHURNING",
+          "interaction_style": "COMPUTE-HEAVY",
           "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY+DELIBERATE"
         }
