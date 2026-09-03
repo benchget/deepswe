@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-TrueIQ Small-N v3
+TrueIQ Small-N
 =================
 A deterministic, small-data-first DeepSWE leaderboard engine.
 """
@@ -12,9 +11,9 @@ import argparse
 import itertools
 import json
 import math
-from dataclasses import dataclass, field, asdict
+from collections.abc import Iterable, Sequence
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
 import pandas as pd
@@ -25,11 +24,12 @@ except Exception:
     spearmanr = None
 
 try:
-    from sklearn.isotonic import IsotonicRegression
     from sklearn.decomposition import PCA
-    from sklearn.preprocessing import RobustScaler
     from sklearn.ensemble import RandomForestRegressor
+    from sklearn.isotonic import IsotonicRegression
     from sklearn.model_selection import GroupKFold, cross_val_score
+    from sklearn.preprocessing import RobustScaler
+
     SKLEARN_AVAILABLE = True
 except Exception:
     SKLEARN_AVAILABLE = False
@@ -39,26 +39,29 @@ except Exception:
 # Configuration
 # -----------------------------------------------------------------------------
 
+
 @dataclass
 class Config:
-    effort_order: Dict[str, int] = field(default_factory=lambda: {
-        "low": 0,
-        "medium": 1,
-        "high": 2,
-        "xhigh": 3,
-        "max": 4,
-        "default": 2,
-        "none": 2,
-        "": 2,
-    })
+    effort_order: dict[str, int] = field(
+        default_factory=lambda: {
+            "low": 0,
+            "medium": 1,
+            "high": 2,
+            "xhigh": 3,
+            "max": 4,
+            "default": 2,
+            "none": 2,
+            "": 2,
+        }
+    )
 
-    profile_peak_weights: Tuple[float, ...] = (0.35, 0.45, 0.55)
-    upper_weight_shapes: Tuple[Tuple[float, float, float], ...] = (
+    profile_peak_weights: tuple[float, ...] = (0.35, 0.45, 0.55)
+    upper_weight_shapes: tuple[tuple[float, float, float], ...] = (
         (0.20, 0.30, 0.50),
         (0.25, 0.35, 0.40),
     )
-    breadth_weights: Tuple[float, ...] = (0.00, 0.05, 0.10)
-    spam_tax_caps: Tuple[float, ...] = (0.20, 0.24, 0.28)
+    breadth_weights: tuple[float, ...] = (0.00, 0.05, 0.10)
+    spam_tax_caps: tuple[float, ...] = (0.20, 0.24, 0.28)
     spam_power: float = 1.25
 
     spam_pct_lo: float = 0.70
@@ -103,6 +106,7 @@ BUILTIN_MODEL_MODES = {
 # -----------------------------------------------------------------------------
 # Utility helpers
 # -----------------------------------------------------------------------------
+
 
 def fnum(x, default=np.nan) -> float:
     try:
@@ -214,24 +218,35 @@ def provider_family(model: str) -> str:
 # Loading and run feature engineering
 # -----------------------------------------------------------------------------
 
+
 class Loader:
     def __init__(self, cfg: Config):
         self.cfg = cfg
 
-    def load(self, path: str) -> Tuple[pd.DataFrame, dict]:
-        with open(path, "r", encoding="utf-8") as f:
+    def load(self, path: str) -> tuple[pd.DataFrame, dict]:
+        with open(path, encoding="utf-8") as f:
             raw = json.load(f)
         rows = raw.get("rows", raw if isinstance(raw, list) else [])
         if not isinstance(rows, list) or not rows:
             raise ValueError("Expected a JSON object with non-empty `rows` array.")
         df = pd.DataFrame(rows).copy()
-        required = ["model", "pass_at_1", "pass_at_4", "mean_agent_steps", "mean_output_tokens"]
+        required = [
+            "model",
+            "pass_at_1",
+            "pass_at_4",
+            "mean_agent_steps",
+            "mean_output_tokens",
+        ]
         missing = [c for c in required if c not in df.columns]
         if missing:
             raise ValueError(f"Missing required columns: {missing}")
         df["model"] = df["model"].map(norm_model)
-        df["effort"] = df.get("reasoning_effort", pd.Series([None] * len(df))).map(norm_effort)
-        df["effort_num"] = df["effort"].map(lambda x: self.cfg.effort_order.get(x, 2)).astype(int)
+        df["effort"] = df.get("reasoning_effort", pd.Series([None] * len(df))).map(
+            norm_effort
+        )
+        df["effort_num"] = (
+            df["effort"].map(lambda x: self.cfg.effort_order.get(x, 2)).astype(int)
+        )
         return df, raw if isinstance(raw, dict) else {"rows": raw}
 
 
@@ -242,17 +257,33 @@ class FeatureEngineer:
         x["pass4"] = pd.to_numeric(x["pass_at_4"], errors="coerce") * 100.0
         x["steps"] = pd.to_numeric(x["mean_agent_steps"], errors="coerce")
         x["out_tokens"] = pd.to_numeric(x["mean_output_tokens"], errors="coerce")
-        x["input_tokens"] = pd.to_numeric(x.get("mean_input_tokens", np.nan), errors="coerce")
-        x["cache_tokens"] = pd.to_numeric(x.get("mean_cache_tokens", np.nan), errors="coerce")
-        x["duration"] = pd.to_numeric(x.get("mean_duration_seconds", np.nan), errors="coerce")
-        x["peak_context"] = pd.to_numeric(x.get("median_peak_context_tokens", np.nan), errors="coerce")
+        x["input_tokens"] = pd.to_numeric(
+            x.get("mean_input_tokens", np.nan), errors="coerce"
+        )
+        x["cache_tokens"] = pd.to_numeric(
+            x.get("mean_cache_tokens", np.nan), errors="coerce"
+        )
+        x["duration"] = pd.to_numeric(
+            x.get("mean_duration_seconds", np.nan), errors="coerce"
+        )
+        x["peak_context"] = pd.to_numeric(
+            x.get("median_peak_context_tokens", np.nan), errors="coerce"
+        )
         x["cost"] = pd.to_numeric(x.get("mean_cost_usd", np.nan), errors="coerce")
-        x["ci_half_pp"] = pd.to_numeric(x.get("ci_half", np.nan), errors="coerce") * 100.0
-        x["pass1_sigma"] = x.get("ci_half", pd.Series(np.nan, index=x.index)).map(ci_sigma_from_half)
+        x["ci_half_pp"] = (
+            pd.to_numeric(x.get("ci_half", np.nan), errors="coerce") * 100.0
+        )
+        x["pass1_sigma"] = x.get("ci_half", pd.Series(np.nan, index=x.index)).map(
+            ci_sigma_from_half
+        )
 
         x["tokens_per_step"] = x["out_tokens"] / x["steps"].replace(0, np.nan)
-        x["steps_per_100k_out"] = x["steps"] / x["out_tokens"].replace(0, np.nan) * 100000.0
-        x["sec_per_1k_out"] = x["duration"] / (x["out_tokens"].replace(0, np.nan) / 1000.0)
+        x["steps_per_100k_out"] = (
+            x["steps"] / x["out_tokens"].replace(0, np.nan) * 100000.0
+        )
+        x["sec_per_1k_out"] = x["duration"] / (
+            x["out_tokens"].replace(0, np.nan) / 1000.0
+        )
         x["sec_per_step"] = x["duration"] / x["steps"].replace(0, np.nan)
         x["input_per_step"] = x["input_tokens"] / x["steps"].replace(0, np.nan)
         x["context_per_step"] = x["peak_context"] / x["steps"].replace(0, np.nan)
@@ -273,6 +304,7 @@ class FeatureEngineer:
 # Breadth: Pass@4 residual relative to Pass@1
 # -----------------------------------------------------------------------------
 
+
 class BreadthModel:
     def fit_transform(self, runs: pd.DataFrame) -> pd.DataFrame:
         out = runs.copy()
@@ -289,7 +321,9 @@ class BreadthModel:
                 coef = np.polyfit(p1[ok], p4[ok], 1)
                 expected[ok] = np.clip(np.polyval(coef, p1[ok]), 0, 100)
         out["pass4_expected"] = expected
-        out["breadth_residual"] = (out["pass4"] - out["pass4_expected"]).clip(-12.0, 12.0)
+        out["breadth_residual"] = (out["pass4"] - out["pass4_expected"]).clip(
+            -12.0, 12.0
+        )
         return out
 
 
@@ -297,10 +331,17 @@ class BreadthModel:
 # Leave-one-model-out peer percentiles
 # -----------------------------------------------------------------------------
 
+
 class PeerNormalizer:
     METRICS = [
-        "steps", "out_tokens", "tokens_per_step", "steps_per_100k_out",
-        "sec_per_1k_out", "sec_per_step", "input_per_step", "context_per_step",
+        "steps",
+        "out_tokens",
+        "tokens_per_step",
+        "steps_per_100k_out",
+        "sec_per_1k_out",
+        "sec_per_step",
+        "input_per_step",
+        "context_per_step",
     ]
 
     def transform(self, runs: pd.DataFrame, cfg: Config) -> pd.DataFrame:
@@ -308,7 +349,9 @@ class PeerNormalizer:
         for metric in self.METRICS:
             vals = []
             for _, r in out.iterrows():
-                peers = out[(out["effort"] == r["effort"]) & (out["model"] != r["model"])][metric]
+                peers = out[
+                    (out["effort"] == r["effort"]) & (out["model"] != r["model"])
+                ][metric]
                 peers = peers[np.isfinite(peers)]
                 if len(peers) < 4:
                     peers = out[out["model"] != r["model"]][metric]
@@ -333,10 +376,11 @@ class PeerNormalizer:
 # Model modes
 # -----------------------------------------------------------------------------
 
-def load_model_modes(path: Optional[str]) -> Dict[str, str]:
+
+def load_model_modes(path: str | None) -> dict[str, str]:
     modes = dict(BUILTIN_MODEL_MODES)
     if path:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             raw = json.load(f)
         for k, v in raw.items():
             vv = str(v).strip().lower()
@@ -346,7 +390,7 @@ def load_model_modes(path: Optional[str]) -> Dict[str, str]:
     return modes
 
 
-def resolve_mode(model: str, n_efforts: int, modes: Dict[str, str]) -> str:
+def resolve_mode(model: str, n_efforts: int, modes: dict[str, str]) -> str:
     explicit = modes.get(model, "auto")
     if explicit == "fixed":
         return "fixed"
@@ -361,6 +405,7 @@ def resolve_mode(model: str, n_efforts: int, modes: Dict[str, str]) -> str:
 # Effort response and top-end efficiency
 # -----------------------------------------------------------------------------
 
+
 class EffortAnalyzer:
     def __init__(self, cfg: Config):
         self.cfg = cfg
@@ -369,8 +414,14 @@ class EffortAnalyzer:
         gs = g.sort_values(["effort_num", "effort"]).copy()
         n = len(gs)
         if n <= 1:
-            response = "FIXED-EFFORT" if mode == "fixed" else (
-                "UNMEASURED-CURVE" if mode in {"tunable", "incomplete"} else "SINGLE-SETTING"
+            response = (
+                "FIXED-EFFORT"
+                if mode == "fixed"
+                else (
+                    "UNMEASURED-CURVE"
+                    if mode in {"tunable", "incomplete"}
+                    else "SINGLE-SETTING"
+                )
             )
             return {
                 "effort_response": response,
@@ -398,9 +449,13 @@ class EffortAnalyzer:
 
         hunger_abs = np.clip((top_gain - self.cfg.hunger_top_gain_pp) / 7.0, 0.0, 1.0)
         hunger_sig = np.clip((top_z - 1.0) / 2.0, 0.0, 1.0)
-        hunger_rel = np.clip(safe_div(top_gain, max(max_gain, 1e-6), 0.0) /
-                             max(self.cfg.hunger_relative_to_max_gain, 1e-6), 0.0, 1.0)
-        hunger = float((0.45 * hunger_abs + 0.35 * hunger_sig + 0.20 * hunger_rel))
+        hunger_rel = np.clip(
+            safe_div(top_gain, max(max_gain, 1e-6), 0.0)
+            / max(self.cfg.hunger_relative_to_max_gain, 1e-6),
+            0.0,
+            1.0,
+        )
+        hunger = float(0.45 * hunger_abs + 0.35 * hunger_sig + 0.20 * hunger_rel)
 
         earlier = gains[:-1] if len(gains) > 1 else np.array([])
         earlier_max = float(np.max(earlier)) if len(earlier) else 0.0
@@ -408,9 +463,17 @@ class EffortAnalyzer:
         typical_pos = float(np.median(positive)) if len(positive) else 0.0
         spike_ratio = safe_div(max_gain, max(typical_pos, 1e-6), 0.0)
 
-        if top_gain >= self.cfg.hunger_top_gain_pp and top_z >= 1.0 and top_gain >= self.cfg.hunger_relative_to_max_gain * max(max_gain, 1e-6):
+        if (
+            top_gain >= self.cfg.hunger_top_gain_pp
+            and top_z >= 1.0
+            and top_gain >= self.cfg.hunger_relative_to_max_gain * max(max_gain, 1e-6)
+        ):
             response = "EFFORT-HUNGRY"
-        elif max_gain_idx < len(gains) - 1 and max_gain >= max(6.0, 1.6 * max(typical_pos, 1.0)) and spike_ratio >= self.cfg.threshold_spike_ratio:
+        elif (
+            max_gain_idx < len(gains) - 1
+            and max_gain >= max(6.0, 1.6 * max(typical_pos, 1.0))
+            and spike_ratio >= self.cfg.threshold_spike_ratio
+        ):
             response = "THRESHOLDED"
         elif earlier_max >= 5.0 and top_gain <= self.cfg.saturation_top_gain_pp:
             response = "SATURATING"
@@ -425,20 +488,25 @@ class EffortAnalyzer:
             wg = max(float(dwork[j]), 0.0)
             qg = float(gains[j])
             z = float(gain_z[j])
-            over = wg >= self.cfg.overthink_work_log_gain and (qg <= self.cfg.overthink_gain_pp or z < 0.75)
+            over = wg >= self.cfg.overthink_work_log_gain and (
+                qg <= self.cfg.overthink_gain_pp or z < 0.75
+            )
             over_flags.append(over)
             effs.append(safe_div(qg, max(wg, 1e-6), np.nan))
         if any(over_flags):
             top_eff = "OVERTHINKING"
         elif top_gain >= 5.0 and top_z >= 1.0:
             top_eff = "SCALING"
-        elif np.isfinite(np.nanmedian(effs)) and np.nanmedian(effs) >= self.cfg.efficient_gain_per_logwork:
+        elif (
+            np.isfinite(np.nanmedian(effs))
+            and np.nanmedian(effs) >= self.cfg.efficient_gain_per_logwork
+        ):
             top_eff = "EFFICIENT"
         else:
             top_eff = "DIMINISHING"
 
         notes = "; ".join(
-            f"{gs.iloc[i]['effort']}->{gs.iloc[i+1]['effort']}: {gains[i]:+.2f}pp"
+            f"{gs.iloc[i]['effort']}->{gs.iloc[i + 1]['effort']}: {gains[i]:+.2f}pp"
             for i in range(len(gains))
         )
         top3 = gs.tail(min(3, n))["pass1"].to_numpy(float)
@@ -458,8 +526,9 @@ class EffortAnalyzer:
 # Model aggregation and phenotypes
 # -----------------------------------------------------------------------------
 
+
 class ModelBuilder:
-    def __init__(self, cfg: Config, modes: Dict[str, str]):
+    def __init__(self, cfg: Config, modes: dict[str, str]):
         self.cfg = cfg
         self.modes = modes
         self.effort = EffortAnalyzer(cfg)
@@ -482,8 +551,15 @@ class ModelBuilder:
             spam_vals = gs["spam_run_strength"].to_numpy(float)
             spam_gate = spam_vals >= self.cfg.spam_run_gate
             persistence = float(np.mean(spam_gate)) if len(spam_vals) else 0.0
-            if n >= self.cfg.spam_min_efforts and persistence >= self.cfg.spam_persistence_min:
-                spam_strength = float(np.median(spam_vals[spam_gate]) * math.sqrt(persistence)) if np.any(spam_gate) else 0.0
+            if (
+                n >= self.cfg.spam_min_efforts
+                and persistence >= self.cfg.spam_persistence_min
+            ):
+                spam_strength = (
+                    float(np.median(spam_vals[spam_gate]) * math.sqrt(persistence))
+                    if np.any(spam_gate)
+                    else 0.0
+                )
             else:
                 spam_strength = 0.0
             local_mechanical = float(np.max(spam_vals)) if len(spam_vals) else 0.0
@@ -496,63 +572,91 @@ class ModelBuilder:
 
             surgical_parts = [
                 scale_percentile(cap_pct, self.cfg.surgeon_capability_pct, 0.98),
-                scale_percentile(1.0 - steps_pct, 1.0 - self.cfg.surgeon_steps_pct_max, 0.98),
+                scale_percentile(
+                    1.0 - steps_pct, 1.0 - self.cfg.surgeon_steps_pct_max, 0.98
+                ),
                 scale_percentile(depth_pct, self.cfg.surgeon_depth_pct_min, 0.98),
-                max(scale_percentile(delib_pct, self.cfg.surgeon_delib_floor_pct, 0.90), 0.20),
+                max(
+                    scale_percentile(delib_pct, self.cfg.surgeon_delib_floor_pct, 0.90),
+                    0.20,
+                ),
             ]
             surgical_strength = geometric_mean(surgical_parts)
             if spam_strength >= 0.45:
                 interaction = "SPAMMER"
             elif surgical_strength >= 0.55:
                 interaction = "SURGICAL"
-            elif steps_pct >= self.cfg.compute_heavy_steps_pct and delib_pct >= self.cfg.compute_heavy_delib_pct:
+            elif (
+                steps_pct >= self.cfg.compute_heavy_steps_pct
+                and delib_pct >= self.cfg.compute_heavy_delib_pct
+            ):
                 interaction = "COMPUTE-HEAVY"
-            elif steps_pct >= self.cfg.compute_heavy_steps_pct or local_mechanical >= 0.45:
+            elif (
+                steps_pct >= self.cfg.compute_heavy_steps_pct
+                or local_mechanical >= 0.45
+            ):
                 interaction = "CHURNING"
             else:
                 interaction = "CLEAN"
 
-            mean_ci = float(np.nanmean(gs["ci_half_pp"])) if np.any(np.isfinite(gs["ci_half_pp"])) else np.nan
+            mean_ci = (
+                float(np.nanmean(gs["ci_half_pp"]))
+                if np.any(np.isfinite(gs["ci_half_pp"]))
+                else np.nan
+            )
             if mode == "fixed":
                 evidence = "FIXED-EFFORT"
             elif n == 1:
                 evidence = "SINGLE-SETTING"
             elif mode == "incomplete":
                 evidence = "PARTIAL-CURVE"
-            elif n >= 3 and effort_info["top3_range"] <= self.cfg.stable_top3_range_pp and (not np.isfinite(mean_ci) or mean_ci <= self.cfg.stable_ci_half_pp):
+            elif (
+                n >= 3
+                and effort_info["top3_range"] <= self.cfg.stable_top3_range_pp
+                and (not np.isfinite(mean_ci) or mean_ci <= self.cfg.stable_ci_half_pp)
+            ):
                 evidence = "STABLE"
-            elif n >= 3 and effort_info["top3_range"] >= self.cfg.variable_top3_range_pp:
+            elif (
+                n >= 3 and effort_info["top3_range"] >= self.cfg.variable_top3_range_pp
+            ):
                 evidence = "VARIABLE"
             else:
                 evidence = "SUPPORTED"
 
-            rows.append({
-                "model": m,
-                "provider_family": provider_family(m),
-                "mode": mode,
-                "n_efforts": n,
-                "efforts": ",".join(gs["effort"].tolist()),
-                "peak_pass1": float(gs["pass1"].max()),
-                "upper_pass1_mean": float(upper["pass1"].mean()),
-                "breadth_residual_median": float(np.nanmedian(upper["breadth_residual"])),
-                "spam_strength": float(np.clip(spam_strength, 0.0, 1.0)),
-                "local_mechanical_strength": local_mechanical,
-                "spam_persistence": persistence,
-                "surgical_strength": float(np.clip(surgical_strength, 0.0, 1.0)),
-                "upper_steps_pct": steps_pct,
-                "upper_depth_pct": depth_pct,
-                "upper_delib_pct": delib_pct,
-                "interaction_style": interaction,
-                "evidence": evidence,
-                "mean_ci_half_pp": mean_ci,
-                **effort_info,
-            })
+            rows.append(
+                {
+                    "model": m,
+                    "provider_family": provider_family(m),
+                    "mode": mode,
+                    "n_efforts": n,
+                    "efforts": ",".join(gs["effort"].tolist()),
+                    "peak_pass1": float(gs["pass1"].max()),
+                    "upper_pass1_mean": float(upper["pass1"].mean()),
+                    "breadth_residual_median": float(
+                        np.nanmedian(upper["breadth_residual"])
+                    ),
+                    "spam_strength": float(np.clip(spam_strength, 0.0, 1.0)),
+                    "local_mechanical_strength": local_mechanical,
+                    "spam_persistence": persistence,
+                    "surgical_strength": float(np.clip(surgical_strength, 0.0, 1.0)),
+                    "upper_steps_pct": steps_pct,
+                    "upper_depth_pct": depth_pct,
+                    "upper_delib_pct": delib_pct,
+                    "interaction_style": interaction,
+                    "evidence": evidence,
+                    "mean_ci_half_pp": mean_ci,
+                    **effort_info,
+                }
+            )
         out = pd.DataFrame(rows)
         out["phenotype"] = (
-            out["interaction_style"] + " · " +
-            out["effort_response"] + " · " +
-            out["top_efficiency"] + " · " +
-            out["evidence"]
+            out["interaction_style"]
+            + " · "
+            + out["effort_response"]
+            + " · "
+            + out["top_efficiency"]
+            + " · "
+            + out["evidence"]
         )
         return out
 
@@ -561,13 +665,22 @@ class ModelBuilder:
 # Deterministic specification-curve scoring
 # -----------------------------------------------------------------------------
 
+
 class SpecificationScorer:
     def __init__(self, cfg: Config):
         self.cfg = cfg
 
-    def _profile(self, g: pd.DataFrame, peak_weight: float, shape: Tuple[float, float, float], breadth_weight: float) -> float:
+    def _profile(
+        self,
+        g: pd.DataFrame,
+        peak_weight: float,
+        shape: tuple[float, float, float],
+        breadth_weight: float,
+    ) -> float:
         gs = g.sort_values(["effort_num", "effort"]).copy()
-        q = gs["pass1"].to_numpy(float) + breadth_weight * gs["breadth_residual"].fillna(0.0).to_numpy(float)
+        q = gs["pass1"].to_numpy(float) + breadth_weight * gs[
+            "breadth_residual"
+        ].fillna(0.0).to_numpy(float)
         n = len(q)
         if n == 1:
             return float(q[0])
@@ -581,7 +694,9 @@ class SpecificationScorer:
         peak = float(np.max(upper))
         return float(peak_weight * peak + (1.0 - peak_weight) * upper_mean)
 
-    def score(self, runs: pd.DataFrame, models: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def score(
+        self, runs: pd.DataFrame, models: pd.DataFrame
+    ) -> tuple[pd.DataFrame, pd.DataFrame]:
         m_info = models.set_index("model")
         spec_rows = []
         spec_id = 0
@@ -597,36 +712,46 @@ class SpecificationScorer:
                 spam = fnum(m_info.loc[m, "spam_strength"], 0.0)
                 factor = 1.0 - spam_cap * (max(spam, 0.0) ** self.cfg.spam_power)
                 score = float(np.clip(base * factor, 0.0, 100.0))
-                spec_rows.append({
-                    "spec_id": spec_id,
-                    "model": m,
-                    "peak_weight": peak_w,
-                    "upper_shape": "/".join(f"{x:.2f}" for x in shape),
-                    "breadth_weight": breadth_w,
-                    "spam_tax_cap": spam_cap,
-                    "profile_before_benchmax": base,
-                    "benchmax_factor": factor,
-                    "score": score,
-                })
+                spec_rows.append(
+                    {
+                        "spec_id": spec_id,
+                        "model": m,
+                        "peak_weight": peak_w,
+                        "upper_shape": "/".join(f"{x:.2f}" for x in shape),
+                        "breadth_weight": breadth_w,
+                        "spam_tax_cap": spam_cap,
+                        "profile_before_benchmax": base,
+                        "benchmax_factor": factor,
+                        "score": score,
+                    }
+                )
         specs = pd.DataFrame(spec_rows)
 
-        specs["rank"] = specs.groupby("spec_id")["score"].rank(ascending=False, method="average")
-        agg = specs.groupby("model").agg(
-            trueiq=("score", "median"),
-            spec_score_p10=("score", lambda s: float(np.quantile(s, 0.10))),
-            spec_score_p90=("score", lambda s: float(np.quantile(s, 0.90))),
-            spec_score_min=("score", "min"),
-            spec_score_max=("score", "max"),
-            spec_rank_median=("rank", "median"),
-            spec_rank_best=("rank", "min"),
-            spec_rank_worst=("rank", "max"),
-            profile_before_benchmax=("profile_before_benchmax", "median"),
-            benchmax_factor=("benchmax_factor", "median"),
-        ).reset_index()
+        specs["rank"] = specs.groupby("spec_id")["score"].rank(
+            ascending=False, method="average"
+        )
+        agg = (
+            specs.groupby("model")
+            .agg(
+                trueiq=("score", "median"),
+                spec_score_p10=("score", lambda s: float(np.quantile(s, 0.10))),
+                spec_score_p90=("score", lambda s: float(np.quantile(s, 0.90))),
+                spec_score_min=("score", "min"),
+                spec_score_max=("score", "max"),
+                spec_rank_median=("rank", "median"),
+                spec_rank_best=("rank", "min"),
+                spec_rank_worst=("rank", "max"),
+                profile_before_benchmax=("profile_before_benchmax", "median"),
+                benchmax_factor=("benchmax_factor", "median"),
+            )
+            .reset_index()
+        )
         out = models.merge(agg, on="model", how="left")
         out["spec_width"] = out["spec_score_p90"] - out["spec_score_p10"]
         out["rank_sensitivity"] = out["spec_rank_worst"] - out["spec_rank_best"]
-        out = out.sort_values(["trueiq", "peak_pass1"], ascending=[False, False]).reset_index(drop=True)
+        out = out.sort_values(
+            ["trueiq", "peak_pass1"], ascending=[False, False]
+        ).reset_index(drop=True)
         out["rank"] = np.arange(1, len(out) + 1)
         return out, specs
 
@@ -635,11 +760,14 @@ class SpecificationScorer:
 # Bootstrap uncertainty (optional, score-independent)
 # -----------------------------------------------------------------------------
 
+
 class BootstrapLab:
     def __init__(self, cfg: Config):
         self.cfg = cfg
 
-    def run(self, runs: pd.DataFrame, models: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    def run(
+        self, runs: pd.DataFrame, models: pd.DataFrame
+    ) -> tuple[pd.DataFrame, pd.DataFrame]:
         B = int(self.cfg.bootstrap_samples)
         if B <= 0:
             return pd.DataFrame(), pd.DataFrame()
@@ -653,7 +781,11 @@ class BootstrapLab:
             upper = g.sort_values(["effort_num", "effort"]).tail(min(3, len(g)))
             sigs = upper["pass1_sigma"].to_numpy(float)
             sigs = sigs[np.isfinite(sigs)]
-            sigma = float(np.sqrt(np.mean(sigs ** 2)) / max(math.sqrt(len(sigs)), 1.0)) if len(sigs) else 1.5
+            sigma = (
+                float(np.sqrt(np.mean(sigs**2)) / max(math.sqrt(len(sigs)), 1.0))
+                if len(sigs)
+                else 1.5
+            )
             spec_sigma = fnum(minfo.loc[m, "spec_width"], 0.0) / 2.56
             total_sigma = math.sqrt(max(sigma, 0.0) ** 2 + max(spec_sigma, 0.0) ** 2)
             samples[m] = np.clip(rng.normal(base_score, total_sigma, size=B), 0, 100)
@@ -671,29 +803,35 @@ class BootstrapLab:
         for j, m in enumerate(names):
             s = score_matrix[:, j]
             r = ranks[:, j]
-            rows.append({
-                "model": m,
-                "score_p05": float(np.quantile(s, 0.05)),
-                "score_p50": float(np.quantile(s, 0.50)),
-                "score_p95": float(np.quantile(s, 0.95)),
-                "rank_mean": float(np.mean(r)),
-                "rank_p05": float(np.quantile(r, 0.05)),
-                "rank_p95": float(np.quantile(r, 0.95)),
-                "p_top3": float(np.mean(r <= 3)),
-                "p_top5": float(np.mean(r <= 5)),
-                "p_top10": float(np.mean(r <= 10)),
-            })
+            rows.append(
+                {
+                    "model": m,
+                    "score_p05": float(np.quantile(s, 0.05)),
+                    "score_p50": float(np.quantile(s, 0.50)),
+                    "score_p95": float(np.quantile(s, 0.95)),
+                    "rank_mean": float(np.mean(r)),
+                    "rank_p05": float(np.quantile(r, 0.05)),
+                    "rank_p95": float(np.quantile(r, 0.95)),
+                    "p_top3": float(np.mean(r <= 3)),
+                    "p_top5": float(np.mean(r <= 5)),
+                    "p_top10": float(np.mean(r <= 10)),
+                }
+            )
         for i in range(len(names)):
             for j in range(i + 1, len(names)):
                 gap = score_matrix[:, i] - score_matrix[:, j]
-                pairs.append({
-                    "model_a": names[i],
-                    "model_b": names[j],
-                    "p_a_above_b": float(np.mean(gap > 0) + 0.5 * np.mean(gap == 0)),
-                    "median_gap": float(np.median(gap)),
-                    "gap_p05": float(np.quantile(gap, 0.05)),
-                    "gap_p95": float(np.quantile(gap, 0.95)),
-                })
+                pairs.append(
+                    {
+                        "model_a": names[i],
+                        "model_b": names[j],
+                        "p_a_above_b": float(
+                            np.mean(gap > 0) + 0.5 * np.mean(gap == 0)
+                        ),
+                        "median_gap": float(np.median(gap)),
+                        "gap_p05": float(np.quantile(gap, 0.05)),
+                        "gap_p95": float(np.quantile(gap, 0.95)),
+                    }
+                )
         return pd.DataFrame(rows), pd.DataFrame(pairs)
 
 
@@ -701,11 +839,22 @@ class BootstrapLab:
 # Diagnostics: correlations and optional small-N ML (never used in score)
 # -----------------------------------------------------------------------------
 
+
 class Diagnostics:
     RUN_FEATURES = [
-        "steps", "out_tokens", "input_tokens", "duration", "peak_context", "cost",
-        "tokens_per_step", "steps_per_100k_out", "sec_per_1k_out", "sec_per_step",
-        "input_per_step", "context_per_step", "cache_ratio",
+        "steps",
+        "out_tokens",
+        "input_tokens",
+        "duration",
+        "peak_context",
+        "cost",
+        "tokens_per_step",
+        "steps_per_100k_out",
+        "sec_per_1k_out",
+        "sec_per_step",
+        "input_per_step",
+        "context_per_step",
+        "cache_ratio",
     ]
 
     def correlations(self, runs: pd.DataFrame) -> pd.DataFrame:
@@ -719,13 +868,19 @@ class Diagnostics:
                 r = spearman_safe(g[f], g["pass1"])
                 if np.isfinite(r):
                     by_eff.append(r)
-            rows.append({
-                "feature": f,
-                "spearman_global": rho,
-                "spearman_within_effort_median": float(np.median(by_eff)) if by_eff else np.nan,
-                "n_efforts_with_corr": len(by_eff),
-            })
-        return pd.DataFrame(rows).sort_values("spearman_global", key=lambda s: s.abs(), ascending=False)
+            rows.append(
+                {
+                    "feature": f,
+                    "spearman_global": rho,
+                    "spearman_within_effort_median": float(np.median(by_eff))
+                    if by_eff
+                    else np.nan,
+                    "n_efforts_with_corr": len(by_eff),
+                }
+            )
+        return pd.DataFrame(rows).sort_values(
+            "spearman_global", key=lambda s: s.abs(), ascending=False
+        )
 
     def ml_diagnostics(self, runs: pd.DataFrame, cfg: Config) -> dict:
         meta = {"available": False, "used_in_score": False}
@@ -753,12 +908,16 @@ class Diagnostics:
         n_splits = min(5, len(np.unique(groups)))
         cv = GroupKFold(n_splits=n_splits)
         try:
-            mae = -cross_val_score(rf, Xs, y, groups=groups, cv=cv, scoring="neg_mean_absolute_error").mean()
+            mae = -cross_val_score(
+                rf, Xs, y, groups=groups, cv=cv, scoring="neg_mean_absolute_error"
+            ).mean()
             r2 = cross_val_score(rf, Xs, y, groups=groups, cv=cv, scoring="r2").mean()
         except Exception:
             mae, r2 = np.nan, np.nan
         rf.fit(Xs, y)
-        importance = sorted(zip(feats, rf.feature_importances_), key=lambda z: z[1], reverse=True)
+        importance = sorted(
+            zip(feats, rf.feature_importances_), key=lambda z: z[1], reverse=True
+        )
 
         pca = PCA(n_components=min(5, Xs.shape[1], Xs.shape[0]))
         pca.fit(Xs)
@@ -768,7 +927,9 @@ class Diagnostics:
             "warning": "Diagnostic only. Small-N ML is not trusted as a scorer.",
             "group_cv_mae": float(mae) if np.isfinite(mae) else None,
             "group_cv_r2": float(r2) if np.isfinite(r2) else None,
-            "rf_importance": [{"feature": f, "importance": float(v)} for f, v in importance],
+            "rf_importance": [
+                {"feature": f, "importance": float(v)} for f, v in importance
+            ],
             "pca_explained_variance": [float(v) for v in pca.explained_variance_ratio_],
         }
         return meta
@@ -778,27 +939,90 @@ class Diagnostics:
 # Run notes
 # -----------------------------------------------------------------------------
 
+
 class RunNoteEngine:
     def apply(self, runs: pd.DataFrame, models: pd.DataFrame) -> pd.DataFrame:
         out = runs.copy()
         mi = models.set_index("model")
-        notes = []
-        for _, r in out.iterrows():
-            parts = []
-            if r["spam_run_strength"] >= 0.60:
-                parts.append("MECHANICAL-CHURN")
-            elif r["pct_steps"] >= 0.80:
-                parts.append("STEP-HEAVY")
-            if r["pct_tokens_per_step"] >= 0.80:
-                parts.append("DEEP-STEPS")
-            if r["pct_sec_per_1k_out"] >= 0.80:
-                parts.append("DELIBERATE")
-            elif r["pct_fast_tokens"] >= 0.90:
-                parts.append("FAST-LOOP")
-            if not parts:
-                parts.append("NORMAL-RUN")
-            notes.append("+".join(parts))
-        out["run_note"] = notes
+
+        for col in [
+            "run_trueiq",
+            "run_conservative",
+            "run_interaction_style",
+            "run_efficiency",
+            "run_note",
+        ]:
+            out[col] = None
+
+        for model_name, g in out.groupby("model"):
+            m = mi.loc[model_name]
+            benchmax_factor = fnum(m["benchmax_factor"], 1.0)
+            n_efforts = int(m["n_efforts"])
+
+            prev_q = None
+            prev_steps = None
+
+            for idx, r in g.sort_values("effort_num").iterrows():
+                run_q = r["pass1"]
+                run_trueiq = run_q * benchmax_factor
+
+                run_ci = r["ci_half_pp"] if np.isfinite(r["ci_half_pp"]) else 2.5
+                epistemic_unc = 5.0 / math.sqrt(max(n_efforts, 1))
+                total_unc = math.sqrt(run_ci**2 + epistemic_unc**2)
+                run_cons = run_trueiq - 0.84 * total_unc
+
+                if r["spam_run_strength"] >= 0.70:
+                    style = "SPAMMER"
+                elif r["pct_steps"] >= 0.75:
+                    style = "CHURNING"
+                elif (
+                    run_q >= 65.0
+                    and r["pct_steps"] <= 0.40
+                    and r["pct_tokens_per_step"] >= 0.60
+                ):
+                    style = "SURGICAL"
+                elif r["pct_steps"] >= 0.60 and r["pct_sec_per_1k_out"] >= 0.70:
+                    style = "COMPUTE-HEAVY"
+                else:
+                    style = "CLEAN"
+
+                if prev_q is None:
+                    eff = "BASELINE"
+                else:
+                    dq = run_q - prev_q
+                    dsteps = r["steps"] - prev_steps
+                    if dsteps >= 14.0 and dq < 1.5:
+                        eff = "OVERTHINKING"
+                    elif dq < -1.0:
+                        eff = "REGRESSION"
+                    elif dq >= 3.0:
+                        eff = "SCALING"
+                    else:
+                        eff = "EFFICIENT"
+
+                prev_q = run_q
+                prev_steps = r["steps"]
+
+                parts = []
+                if r["spam_run_strength"] >= 0.60:
+                    parts.append("MECHANICAL-CHURN")
+                elif r["pct_steps"] >= 0.80:
+                    parts.append("STEP-HEAVY")
+                if r["pct_tokens_per_step"] >= 0.80:
+                    parts.append("DEEP-STEPS")
+                if r["pct_sec_per_1k_out"] >= 0.80:
+                    parts.append("DELIBERATE")
+                elif r["pct_fast_tokens"] >= 0.90:
+                    parts.append("FAST-LOOP")
+                if not parts:
+                    parts.append("NORMAL-RUN")
+
+                out.loc[idx, "run_note"] = "+".join(parts)
+                out.loc[idx, "run_trueiq"] = run_trueiq
+                out.loc[idx, "run_conservative"] = run_cons
+                out.loc[idx, "run_interaction_style"] = style
+                out.loc[idx, "run_efficiency"] = eff
+
         out["model_trueiq"] = out["model"].map(mi["trueiq"])
         out["model_phenotype"] = out["model"].map(mi["phenotype"])
         return out
@@ -808,13 +1032,14 @@ class RunNoteEngine:
 # Reporting
 # -----------------------------------------------------------------------------
 
+
 class Reporter:
     def __init__(self, cfg: Config):
         self.cfg = cfg
 
     def audit(self, models: pd.DataFrame, raw_meta: dict, diag_meta: dict) -> str:
         lines = []
-        lines.append("# TrueIQ Small-N v3 audit")
+        lines.append("# TrueIQ Small-N audit")
         lines.append("")
         lines.append("## Dataset")
         lines.append(f"- Scope: {raw_meta.get('scope', 'unknown')}")
@@ -834,7 +1059,9 @@ class Reporter:
         lines.append("")
         return "\n".join(lines)
 
-    def write_frontend_json(self, path: Path, models: pd.DataFrame, runs: pd.DataFrame, raw_meta: dict):
+    def write_frontend_json(
+        self, path: Path, models: pd.DataFrame, runs: pd.DataFrame, raw_meta: dict
+    ):
         frontend_data = {
             "meta": {
                 "generated_at": raw_meta.get("generated_at", ""),
@@ -842,52 +1069,63 @@ class Reporter:
                 "n_models": int(models["model"].nunique()),
                 "n_runs": int(len(runs)),
             },
-            "models": []
+            "models": [],
         }
 
         m_info = models.set_index("model")
-        
+
         for model_name, g in runs.groupby("model"):
             m = m_info.loc[model_name]
-            
+
             model_runs = []
             for _, r in g.sort_values("effort_num").iterrows():
-                model_runs.append({
-                    "effort": r["effort"],
-                    "steps": fnum(r["steps"]),
-                    "out_tokens": fnum(r["out_tokens"]),
-                    "cost": fnum(r["cost"]),
-                    "duration": fnum(r["duration"]),
-                    "run_q": fnum(r["pass1"]),
-                    "pass1": fnum(r["pass1"]),
-                    "run_note": r.get("run_note", "")
-                })
+                model_runs.append(
+                    {
+                        "effort": r["effort"],
+                        "steps": fnum(r["steps"]),
+                        "out_tokens": fnum(r["out_tokens"]),
+                        "cost": fnum(r["cost"]),
+                        "duration": fnum(r["duration"]),
+                        "run_q": fnum(r["pass1"]),
+                        "pass1": fnum(r["pass1"]),
+                        "run_trueiq": fnum(r["run_trueiq"]),
+                        "run_conservative": fnum(r["run_conservative"]),
+                        "interaction_style": str(r["run_interaction_style"]),
+                        "run_efficiency": str(r["run_efficiency"]),
+                        "run_note": str(r["run_note"]),
+                    }
+                )
 
-            frontend_data["models"].append({
-                "model_id": model_name,
-                "trueiq": fnum(m["trueiq"]),
-                "conservative_score": fnum(m["spec_score_p10"]),
-                "profile_q": fnum(m["profile_before_benchmax"]),
-                "peak_p1": fnum(m["peak_pass1"]),
-                "n_efforts": int(m["n_efforts"]),
-                "spam_strength": fnum(m["spam_strength"]),
-                "interaction_style": str(m["interaction_style"]),
-                "effort_response": str(m["effort_response"]),
-                "top_efficiency": str(m["top_efficiency"]),
-                "evidence": str(m["evidence"]),
-                "runs": model_runs
-            })
+            frontend_data["models"].append(
+                {
+                    "model_id": model_name,
+                    "trueiq": fnum(m["trueiq"]),
+                    "conservative_score": fnum(m["spec_score_p10"]),
+                    "profile_q": fnum(m["profile_before_benchmax"]),
+                    "peak_p1": fnum(m["peak_pass1"]),
+                    "n_efforts": int(m["n_efforts"]),
+                    "spam_strength": fnum(m["spam_strength"]),
+                    "interaction_style": str(m["interaction_style"]),
+                    "effort_response": str(m["effort_response"]),
+                    "top_efficiency": str(m["top_efficiency"]),
+                    "evidence": str(m["evidence"]),
+                    "runs": model_runs,
+                }
+            )
 
         frontend_data["models"].sort(key=lambda x: x["trueiq"], reverse=True)
-        path.write_text(json.dumps(frontend_data, indent=2, ensure_ascii=False), encoding="utf-8")
+        path.write_text(
+            json.dumps(frontend_data, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
 
 
 # -----------------------------------------------------------------------------
 # Main engine
 # -----------------------------------------------------------------------------
 
+
 class TrueIQSmallN:
-    def __init__(self, cfg: Config, model_modes: Optional[Dict[str, str]] = None):
+    def __init__(self, cfg: Config, model_modes: dict[str, str] | None = None):
         self.cfg = cfg
         self.model_modes = model_modes or dict(BUILTIN_MODEL_MODES)
 
@@ -938,7 +1176,9 @@ class TrueIQSmallN:
             "point_score_random": False,
             "bootstrap_affects_point_rank": False,
         }
-        (outp / "run_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+        (outp / "run_metadata.json").write_text(
+            json.dumps(metadata, indent=2), encoding="utf-8"
+        )
         return {"models": models, "runs": runs, "specs": specs, "metadata": metadata}
 
 
@@ -946,12 +1186,23 @@ class TrueIQSmallN:
 # CLI
 # -----------------------------------------------------------------------------
 
+
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="TrueIQ Small-N v3 deterministic DeepSWE scorer")
-    p.add_argument("--input", required=True, help="leaderboard-live.json / deepswe.json")
+    p = argparse.ArgumentParser(
+        description="TrueIQ Small-N deterministic DeepSWE scorer"
+    )
+    p.add_argument(
+        "--input", required=True, help="leaderboard-live.json / deepswe.json"
+    )
     p.add_argument("--outdir", default="data")
-    p.add_argument("--model-modes", default=None, help="optional JSON mapping model -> fixed/tunable/incomplete/auto")
-    p.add_argument("--bootstrap", type=int, default=0, help="optional uncertainty draws")
+    p.add_argument(
+        "--model-modes",
+        default=None,
+        help="optional JSON mapping model -> fixed/tunable/incomplete/auto",
+    )
+    p.add_argument(
+        "--bootstrap", type=int, default=0, help="optional uncertainty draws"
+    )
     return p
 
 
@@ -962,7 +1213,9 @@ def main() -> None:
     engine = TrueIQSmallN(cfg, modes)
     result = engine.run(args.input, args.outdir)
     models = result["models"]
-    print(models[["rank", "model", "trueiq", "phenotype"]].head(30).to_string(index=False))
+    print(
+        models[["rank", "model", "trueiq", "phenotype"]].head(30).to_string(index=False)
+    )
     print(f"\nWrote outputs to: {args.outdir}")
 
 

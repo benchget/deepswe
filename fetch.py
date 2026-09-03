@@ -131,19 +131,19 @@ def apply_corrections(
     """Apply price corrections to leaderboard rows based on version and model."""
     if version not in corrections:
         return payload
-    
+
     version_corrections = corrections[version]
     rows = payload.get("rows", [])
-    
+
     for row in rows:
         model = row.get("model")
         if model not in version_corrections:
             continue
-        
+
         correction = version_corrections[model]
         multiplier = correction.get("multiplier", 1.0)
         min_raw_cost = correction.get("min_raw_cost")
-        
+
         # Apply corrections to cost fields
         if "mean_cost_usd" in row:
             original_cost = row["mean_cost_usd"]
@@ -152,7 +152,7 @@ def apply_corrections(
                 row["mean_cost_usd"] = original_cost * multiplier
             elif min_raw_cost is None:
                 row["mean_cost_usd"] = original_cost * multiplier
-        
+
         if "median_cost_usd" in row:
             original_cost = row["median_cost_usd"]
             # Apply min_raw_cost threshold if specified
@@ -160,7 +160,7 @@ def apply_corrections(
                 row["median_cost_usd"] = original_cost * multiplier
             elif min_raw_cost is None:
                 row["median_cost_usd"] = original_cost * multiplier
-    
+
     return payload
 
 
@@ -176,7 +176,7 @@ def update_mirror(
     url = leaderboard_url(version=ver, base_url=base_url)
     raw_payload = _http_get(url, timeout=60.0)
     payload = json.loads(raw_payload.decode("utf-8"))
-    
+
     # Load and apply corrections
     corrections = load_corrections(target_dir)
     payload = apply_corrections(payload, ver, corrections)
