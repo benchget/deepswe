@@ -27,6 +27,10 @@
           "duration": 468.87542417149217,
           "run_q": 58.12917594654788,
           "pass1": 58.12917594654788,
+          "run_trueiq": 58.12917594654788,
+          "run_conservative": 55.416079153456906,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -37,6 +41,10 @@
           "duration": 759.2254874630873,
           "run_q": 68.90380313199105,
           "pass1": 68.90380313199105,
+          "run_trueiq": 68.90380313199105,
+          "run_conservative": 66.78292475667283,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -47,6 +55,10 @@
           "duration": 1163.8627881514476,
           "run_q": 72.82850779510022,
           "pass1": 72.82850779510022,
+          "run_trueiq": 72.82850779510022,
+          "run_conservative": 70.33883136033276,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "DEEP-STEPS"
         },
         {
@@ -57,6 +69,10 @@
           "duration": 1559.5597273221476,
           "run_q": 73.15436241610739,
           "pass1": 73.15436241610739,
+          "run_trueiq": 73.15436241610739,
+          "run_conservative": 69.97015189965748,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "OVERTHINKING",
           "run_note": "DEEP-STEPS"
         },
         {
@@ -67,6 +83,10 @@
           "duration": 1911.819866231982,
           "run_q": 73.64864864864865,
           "pass1": 73.64864864864865,
+          "run_trueiq": 73.64864864864865,
+          "run_conservative": 69.89254395898078,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "EFFICIENT",
           "run_note": "DEEP-STEPS"
         }
       ]
@@ -92,6 +112,10 @@
           "duration": 262.2510164579646,
           "run_q": 45.35398230088495,
           "pass1": 45.35398230088495,
+          "run_trueiq": 45.35398230088495,
+          "run_conservative": 42.605824535150504,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -102,6 +126,10 @@
           "duration": 423.3752944181416,
           "run_q": 61.06194690265486,
           "pass1": 61.06194690265486,
+          "run_trueiq": 61.06194690265486,
+          "run_conservative": 58.760435587881624,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "DELIBERATE"
         },
         {
@@ -112,6 +140,10 @@
           "duration": 594.230510789357,
           "run_q": 69.40133037694012,
           "pass1": 69.40133037694012,
+          "run_trueiq": 69.40133037694012,
+          "run_conservative": 67.1708116533704,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -122,6 +154,10 @@
           "duration": 800.5459875388026,
           "run_q": 70.73170731707317,
           "pass1": 70.73170731707317,
+          "run_trueiq": 70.73170731707317,
+          "run_conservative": 68.73135282465219,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "EFFICIENT",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -132,6 +168,10 @@
           "duration": 1128.624910331111,
           "run_q": 72.66666666666667,
           "pass1": 72.66666666666667,
+          "run_trueiq": 72.66666666666667,
+          "run_conservative": 69.6370841901232,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "EFFICIENT",
           "run_note": "NORMAL-RUN"
         }
       ]
@@ -157,6 +197,10 @@
           "duration": 634.7057336951501,
           "run_q": 59.58429561200924,
           "pass1": 59.58429561200924,
+          "run_trueiq": 59.58429561200924,
+          "run_conservative": 56.57826122910812,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "DEEP-STEPS+DELIBERATE"
         },
         {
@@ -167,6 +211,10 @@
           "duration": 810.8967150733945,
           "run_q": 65.36697247706422,
           "pass1": 65.36697247706422,
+          "run_trueiq": 65.36697247706422,
+          "run_conservative": 61.204651266825714,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "SCALING",
           "run_note": "DEEP-STEPS"
         },
         {
@@ -177,6 +225,10 @@
           "duration": 1062.3037221116278,
           "run_q": 68.6046511627907,
           "pass1": 68.6046511627907,
+          "run_trueiq": 68.6046511627907,
+          "run_conservative": 66.50359497765996,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "SCALING",
           "run_note": "DEEP-STEPS"
         },
         {
@@ -187,6 +239,10 @@
           "duration": 1411.5830643938054,
           "run_q": 69.91150442477876,
           "pass1": 69.91150442477876,
+          "run_trueiq": 69.91150442477876,
+          "run_conservative": 66.6012766086726,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "EFFICIENT",
           "run_note": "DEEP-STEPS"
         },
         {
@@ -197,6 +253,10 @@
           "duration": 2092.0106240022938,
           "run_q": 69.72477064220183,
           "pass1": 69.72477064220183,
+          "run_trueiq": 69.72477064220183,
+          "run_conservative": 65.85083903545782,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "OVERTHINKING",
           "run_note": "DEEP-STEPS"
         }
       ]
@@ -222,6 +282,10 @@
           "duration": 2116.1784804168515,
           "run_q": 68.95787139689578,
           "pass1": 68.95787139689578,
+          "run_trueiq": 68.95787139689578,
+          "run_conservative": 64.05179277132382,
+          "interaction_style": "COMPUTE-HEAVY",
+          "run_efficiency": "BASELINE",
           "run_note": "DELIBERATE"
         }
       ]
@@ -247,6 +311,10 @@
           "duration": 4541.447376412417,
           "run_q": 68.51441241685144,
           "pass1": 68.51441241685144,
+          "run_trueiq": 68.51441241685144,
+          "run_conservative": 62.843043894990466,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "DELIBERATE"
         }
       ]
@@ -272,6 +340,10 @@
           "duration": 325.05958362360803,
           "run_q": 41.648106904231625,
           "pass1": 41.648106904231625,
+          "run_trueiq": 41.648106904231625,
+          "run_conservative": 38.78394758238655,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -282,6 +354,10 @@
           "duration": 895.5380579646018,
           "run_q": 67.47787610619469,
           "pass1": 67.47787610619469,
+          "run_trueiq": 67.47787610619469,
+          "run_conservative": 64.63523996363956,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -292,6 +368,10 @@
           "duration": 1083.6365204833703,
           "run_q": 65.18847006651885,
           "pass1": 65.18847006651885,
+          "run_trueiq": 65.18847006651885,
+          "run_conservative": 62.72482990490272,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "REGRESSION",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -302,6 +382,10 @@
           "duration": 1272.3478393858093,
           "run_q": 66.74057649667405,
           "pass1": 66.74057649667405,
+          "run_trueiq": 66.74057649667405,
+          "run_conservative": 63.95668902384838,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "EFFICIENT",
           "run_note": "NORMAL-RUN"
         }
       ]
@@ -327,6 +411,10 @@
           "duration": 176.52513473942093,
           "run_q": 24.053452115812917,
           "pass1": 24.053452115812917,
+          "run_trueiq": 24.053452115812917,
+          "run_conservative": 22.065053372888563,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -337,6 +425,10 @@
           "duration": 229.60274282444442,
           "run_q": 35.11111111111111,
           "pass1": 35.11111111111111,
+          "run_trueiq": 35.11111111111111,
+          "run_conservative": 31.705464504820462,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -347,6 +439,10 @@
           "duration": 364.2859819269911,
           "run_q": 53.76106194690266,
           "pass1": 53.76106194690266,
+          "run_trueiq": 53.76106194690266,
+          "run_conservative": 49.66827150126308,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -357,6 +453,10 @@
           "duration": 584.0832282876107,
           "run_q": 60.17699115044248,
           "pass1": 60.17699115044248,
+          "run_trueiq": 60.17699115044248,
+          "run_conservative": 57.586215629936575,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -367,6 +467,10 @@
           "duration": 1016.6698429312638,
           "run_q": 69.62305986696231,
           "pass1": 69.62305986696231,
+          "run_trueiq": 69.62305986696231,
+          "run_conservative": 66.76978662321676,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "SCALING",
           "run_note": "FAST-LOOP"
         }
       ]
@@ -392,6 +496,10 @@
           "duration": 569.9958436615044,
           "run_q": 26.991150442477874,
           "pass1": 26.991150442477874,
+          "run_trueiq": 26.991150442477874,
+          "run_conservative": 24.140746243550744,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "DELIBERATE"
         },
         {
@@ -402,6 +510,10 @@
           "duration": 1288.995063800885,
           "run_q": 53.98230088495575,
           "pass1": 53.98230088495575,
+          "run_trueiq": 53.98230088495575,
+          "run_conservative": 50.98075440634243,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "DELIBERATE"
         },
         {
@@ -412,6 +524,10 @@
           "duration": 2048.0589126172567,
           "run_q": 64.38053097345133,
           "pass1": 64.38053097345133,
+          "run_trueiq": 64.38053097345133,
+          "run_conservative": 61.02423866844967,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "DELIBERATE"
         },
         {
@@ -422,6 +538,10 @@
           "duration": 1806.3251869889382,
           "run_q": 67.03539823008849,
           "pass1": 67.03539823008849,
+          "run_trueiq": 67.03539823008849,
+          "run_conservative": 61.21239956216938,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "EFFICIENT",
           "run_note": "DELIBERATE"
         }
       ]
@@ -447,6 +567,10 @@
           "duration": 1537.7995419129463,
           "run_q": 63.39285714285714,
           "pass1": 63.39285714285714,
+          "run_trueiq": 63.39285714285714,
+          "run_conservative": 57.81038702219061,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         }
       ]
@@ -472,6 +596,10 @@
           "duration": 2212.510104011062,
           "run_q": 62.83185840707964,
           "pass1": 62.83185840707964,
+          "run_trueiq": 62.83185840707964,
+          "run_conservative": 56.053711955986394,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY"
         }
       ]
@@ -497,6 +625,10 @@
           "duration": 77.14656007522123,
           "run_q": 1.5486725663716814,
           "pass1": 1.5486725663716814,
+          "run_trueiq": 1.5486725663716814,
+          "run_conservative": -0.4549397816906988,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -507,6 +639,10 @@
           "duration": 181.5252541438053,
           "run_q": 11.283185840707963,
           "pass1": 11.283185840707963,
+          "run_trueiq": 11.283185840707963,
+          "run_conservative": 9.279573492645582,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "DELIBERATE"
         },
         {
@@ -517,6 +653,10 @@
           "duration": 473.83880740929203,
           "run_q": 44.24778761061947,
           "pass1": 44.24778761061947,
+          "run_trueiq": 44.24778761061947,
+          "run_conservative": 41.15870283857137,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -527,6 +667,10 @@
           "duration": 731.6846703871681,
           "run_q": 56.85840707964602,
           "pass1": 56.85840707964602,
+          "run_trueiq": 56.85840707964602,
+          "run_conservative": 54.242152242564046,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -537,6 +681,10 @@
           "duration": 1122.9470243995536,
           "run_q": 67.1875,
           "pass1": 67.1875,
+          "run_trueiq": 67.1875,
+          "run_conservative": 63.34399980882441,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         }
       ]
@@ -562,6 +710,10 @@
           "duration": 2567.2746634654786,
           "run_q": 57.46102449888642,
           "pass1": 57.46102449888642,
+          "run_trueiq": 57.46102449888642,
+          "run_conservative": 52.70255499969807,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY+DELIBERATE"
         }
       ]
@@ -587,6 +739,10 @@
           "duration": 651.8271712993347,
           "run_q": 40.79822616407982,
           "pass1": 40.79822616407982,
+          "run_trueiq": 40.79822616407982,
+          "run_conservative": 38.553353808733966,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -597,6 +753,10 @@
           "duration": 880.0083837986726,
           "run_q": 48.67256637168141,
           "pass1": 48.67256637168141,
+          "run_trueiq": 48.67256637168141,
+          "run_conservative": 46.014388675578594,
+          "interaction_style": "COMPUTE-HEAVY",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -607,6 +767,10 @@
           "duration": 1066.903783732301,
           "run_q": 51.76991150442478,
           "pass1": 51.76991150442478,
+          "run_trueiq": 51.76991150442478,
+          "run_conservative": 47.502556239645116,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
         {
@@ -617,6 +781,10 @@
           "duration": 2198.774075261745,
           "run_q": 54.36241610738255,
           "pass1": 54.36241610738255,
+          "run_trueiq": 54.36241610738255,
+          "run_conservative": 50.72127363610581,
+          "interaction_style": "COMPUTE-HEAVY",
+          "run_efficiency": "EFFICIENT",
           "run_note": "DELIBERATE"
         },
         {
@@ -627,6 +795,10 @@
           "duration": 3492.740812641026,
           "run_q": 58.97435897435898,
           "pass1": 58.97435897435898,
+          "run_trueiq": 58.97435897435898,
+          "run_conservative": 56.581527417950504,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "SCALING",
           "run_note": "DEEP-STEPS"
         }
       ]
@@ -652,6 +824,10 @@
           "duration": 826.5496385464602,
           "run_q": 71.01769911504425,
           "pass1": 71.01769911504425,
+          "run_trueiq": 53.97345132743363,
+          "run_conservative": 50.439249827948814,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "BASELINE",
           "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
         },
         {
@@ -662,6 +838,10 @@
           "duration": 686.7691519843399,
           "run_q": 73.8255033557047,
           "pass1": 73.8255033557047,
+          "run_trueiq": 56.10738255033557,
+          "run_conservative": 52.907789942259186,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "EFFICIENT",
           "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
         }
       ]
@@ -687,6 +867,10 @@
           "duration": 927.8692516349557,
           "run_q": 54.86725663716814,
           "pass1": 54.86725663716814,
+          "run_trueiq": 54.86725663716814,
+          "run_conservative": 50.30391161430907,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "BASELINE",
           "run_note": "MECHANICAL-CHURN+FAST-LOOP"
         }
       ]
@@ -712,6 +896,10 @@
           "duration": 484.7029359800885,
           "run_q": 53.76106194690266,
           "pass1": 53.76106194690266,
+          "run_trueiq": 53.76106194690266,
+          "run_conservative": 49.14472354520801,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         }
       ]
@@ -737,6 +925,10 @@
           "duration": 1438.9961937522125,
           "run_q": 53.31858407079646,
           "pass1": 53.31858407079646,
+          "run_trueiq": 53.31858407079646,
+          "run_conservative": 48.15937451554011,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY+FAST-LOOP"
         }
       ]
@@ -762,6 +954,10 @@
           "duration": 897.5133296747788,
           "run_q": 53.31858407079646,
           "pass1": 53.31858407079646,
+          "run_trueiq": 53.31858407079646,
+          "run_conservative": 48.40524435424851,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "FAST-LOOP"
         }
       ]
@@ -787,6 +983,10 @@
           "duration": 734.9105084298441,
           "run_q": 30.51224944320713,
           "pass1": 30.51224944320713,
+          "run_trueiq": 30.51224944320713,
+          "run_conservative": 28.40924179239696,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY"
         },
         {
@@ -797,6 +997,10 @@
           "duration": 1121.270593551111,
           "run_q": 39.77777777777778,
           "pass1": 39.77777777777778,
+          "run_trueiq": 39.77777777777778,
+          "run_conservative": 36.54822815703068,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "SCALING",
           "run_note": "STEP-HEAVY"
         },
         {
@@ -807,6 +1011,10 @@
           "duration": 1728.2193087920355,
           "run_q": 48.23008849557522,
           "pass1": 48.23008849557522,
+          "run_trueiq": 48.23008849557522,
+          "run_conservative": 44.00438972620738,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "SCALING",
           "run_note": "STEP-HEAVY"
         },
         {
@@ -817,6 +1025,10 @@
           "duration": 2414.4529098159646,
           "run_q": 49.667405764966745,
           "pass1": 49.667405764966745,
+          "run_trueiq": 49.667405764966745,
+          "run_conservative": 46.21073597974675,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "OVERTHINKING",
           "run_note": "STEP-HEAVY"
         },
         {
@@ -827,6 +1039,10 @@
           "duration": 4803.543157789592,
           "run_q": 53.84615384615385,
           "pass1": 53.84615384615385,
+          "run_trueiq": 53.84615384615385,
+          "run_conservative": 49.82190845040003,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "SCALING",
           "run_note": "STEP-HEAVY"
         }
       ]
@@ -852,6 +1068,10 @@
           "duration": 1252.0731730707964,
           "run_q": 53.76106194690266,
           "pass1": 53.76106194690266,
+          "run_trueiq": 43.9989998872451,
+          "run_conservative": 40.741400642681974,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "BASELINE",
           "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
         },
         {
@@ -862,6 +1082,10 @@
           "duration": 1240.376194079646,
           "run_q": 65.48672566371681,
           "pass1": 65.48672566371681,
+          "run_trueiq": 53.595489574586615,
+          "run_conservative": 50.045556270746786,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "SCALING",
           "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
         },
         {
@@ -872,6 +1096,10 @@
           "duration": 1244.9565387986725,
           "run_q": 65.2654867256637,
           "pass1": 65.2654867256637,
+          "run_trueiq": 53.41442373142922,
+          "run_conservative": 50.56215853104246,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "EFFICIENT",
           "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
         }
       ]
@@ -897,6 +1125,10 @@
           "duration": 1368.707164818584,
           "run_q": 51.76991150442478,
           "pass1": 51.76991150442478,
+          "run_trueiq": 51.76991150442478,
+          "run_conservative": 47.38447436557234,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "DEEP-STEPS"
         }
       ]
@@ -922,6 +1154,10 @@
           "duration": 1477.8607510707964,
           "run_q": 46.68141592920354,
           "pass1": 46.68141592920354,
+          "run_trueiq": 46.68141592920354,
+          "run_conservative": 41.45408152552702,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         }
       ]
@@ -947,6 +1183,10 @@
           "duration": 1794.4733617809734,
           "run_q": 36.283185840707965,
           "pass1": 36.283185840707965,
+          "run_trueiq": 36.283185840707965,
+          "run_conservative": 31.309194587371948,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "DELIBERATE"
         },
         {
@@ -957,6 +1197,10 @@
           "duration": 2629.2083211311115,
           "run_q": 43.77777777777778,
           "pass1": 43.77777777777778,
+          "run_trueiq": 43.77777777777778,
+          "run_conservative": 40.473063875230736,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "SCALING",
           "run_note": "DELIBERATE"
         }
       ]
@@ -982,6 +1226,10 @@
           "duration": 1125.1601607057523,
           "run_q": 36.06194690265487,
           "pass1": 36.06194690265487,
+          "run_trueiq": 36.06194690265487,
+          "run_conservative": 30.700959266641934,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "NORMAL-RUN"
         }
       ]
@@ -1007,6 +1255,10 @@
           "duration": 2163.7950712809734,
           "run_q": 30.53097345132743,
           "pass1": 30.53097345132743,
+          "run_trueiq": 30.53097345132743,
+          "run_conservative": 26.309967003428667,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY+DELIBERATE"
         }
       ]
@@ -1032,6 +1284,10 @@
           "duration": 2815.01307943459,
           "run_q": 29.933481152993345,
           "pass1": 29.933481152993345,
+          "run_trueiq": 29.933481152993345,
+          "run_conservative": 24.50616970165431,
+          "interaction_style": "CHURNING",
+          "run_efficiency": "BASELINE",
           "run_note": "STEP-HEAVY+DELIBERATE"
         }
       ]
@@ -1057,6 +1313,10 @@
           "duration": 867.7979107013274,
           "run_q": 11.725663716814159,
           "pass1": 11.725663716814159,
+          "run_trueiq": 11.725663716814159,
+          "run_conservative": 7.3452716064517105,
+          "interaction_style": "CLEAN",
+          "run_efficiency": "BASELINE",
           "run_note": "DELIBERATE"
         }
       ]

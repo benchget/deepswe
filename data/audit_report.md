@@ -1,4 +1,4 @@
-# TrueIQ Small-N v3 audit
+# TrueIQ Small-N audit
 
 ## Dataset
 - Scope: Every DeepSWE rollout across imported Pier jobs, grouped by configuration (harness + model + reasoning effort)
