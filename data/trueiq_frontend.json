@@ -1,16 +1,16 @@
 {
   "meta": {
-    "generated_at": "2026-09-02T15:18:19Z",
+    "generated_at": "2026-09-03T22:24:37.984682+00:00",
     "n_tasks_in_set": 113,
-    "n_models": 27,
-    "n_runs": 65
+    "n_models": 28,
+    "n_runs": 70
   },
   "models": [
     {
       "model_id": "claude-opus-5",
-      "trueiq": 73.49559135780494,
-      "conservative_score": 73.43681924813498,
-      "profile_q": 73.49559135780494,
+      "trueiq": 73.56480004737426,
+      "conservative_score": 73.44220378376764,
+      "profile_q": 73.56480004737426,
       "peak_p1": 73.64864864864865,
       "n_efforts": 5,
       "spam_strength": 0.0,
@@ -31,7 +31,7 @@
           "run_conservative": 55.416079153456906,
           "interaction_style": "CLEAN",
           "run_efficiency": "BASELINE",
-          "run_note": "NORMAL-RUN"
+          "run_note": "DEEP-STEPS"
         },
         {
           "effort": "medium",
@@ -92,10 +92,95 @@
       ]
     },
     {
+      "model_id": "gpt-6-astra",
+      "trueiq": 73.52101769911505,
+      "conservative_score": 73.22269911504425,
+      "profile_q": 73.52101769911505,
+      "peak_p1": 74.11504424778761,
+      "n_efforts": 5,
+      "spam_strength": 0.0,
+      "interaction_style": "SURGICAL",
+      "effort_response": "SATURATING",
+      "top_efficiency": "OVERTHINKING",
+      "evidence": "STABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 19.537610619469028,
+          "out_tokens": 10579.53982300885,
+          "cost": 2.188762706637168,
+          "duration": 613.4247787610619,
+          "run_q": 67.03539823008849,
+          "pass1": 67.03539823008849,
+          "run_trueiq": 67.03539823008849,
+          "run_conservative": 64.86237172907205,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "BASELINE",
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "medium",
+          "steps": 26.030973451327434,
+          "out_tokens": 20361.809734513274,
+          "cost": 4.379527705752213,
+          "duration": 883.9358407079646,
+          "run_q": 72.78761061946902,
+          "pass1": 72.78761061946902,
+          "run_trueiq": 72.78761061946902,
+          "run_conservative": 69.913597251689,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "SCALING",
+          "run_note": "DELIBERATE"
+        },
+        {
+          "effort": "high",
+          "steps": 27.424778761061948,
+          "out_tokens": 26505.853982300883,
+          "cost": 5.723721956194691,
+          "duration": 1038.6858407079646,
+          "run_q": 73.23008849557522,
+          "pass1": 73.23008849557522,
+          "run_trueiq": 73.23008849557522,
+          "run_conservative": 69.79528697259944,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "OVERTHINKING",
+          "run_note": "DEEP-STEPS+DELIBERATE"
+        },
+        {
+          "effort": "xhigh",
+          "steps": 28.754424778761063,
+          "out_tokens": 29557.327433628318,
+          "cost": 6.52377356460177,
+          "duration": 1132.4004424778761,
+          "run_q": 74.11504424778761,
+          "pass1": 74.11504424778761,
+          "run_trueiq": 74.11504424778761,
+          "run_conservative": 71.06195967028312,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "EFFICIENT",
+          "run_note": "DEEP-STEPS+DELIBERATE"
+        },
+        {
+          "effort": "max",
+          "steps": 28.45353982300885,
+          "out_tokens": 61148.50663716814,
+          "cost": 12.369032401327434,
+          "duration": 1982.966814159292,
+          "run_q": 73.23008849557522,
+          "pass1": 73.23008849557522,
+          "run_trueiq": 73.23008849557522,
+          "run_conservative": 71.22647614751284,
+          "interaction_style": "SURGICAL",
+          "run_efficiency": "OVERTHINKING",
+          "run_note": "DEEP-STEPS+DELIBERATE"
+        }
+      ]
+    },
+    {
       "model_id": "gpt-5-6-sol",
-      "trueiq": 71.8733256643709,
-      "conservative_score": 71.66022679852705,
-      "profile_q": 71.8733256643709,
+      "trueiq": 71.93228584136205,
+      "conservative_score": 71.70519361268633,
+      "profile_q": 71.93228584136205,
       "peak_p1": 72.66666666666667,
       "n_efforts": 5,
       "spam_strength": 0.0,
@@ -142,7 +227,7 @@
           "pass1": 69.40133037694012,
           "run_trueiq": 69.40133037694012,
           "run_conservative": 67.1708116533704,
-          "interaction_style": "SURGICAL",
+          "interaction_style": "CLEAN",
           "run_efficiency": "SCALING",
           "run_note": "NORMAL-RUN"
         },
@@ -178,13 +263,13 @@
     },
     {
       "model_id": "claude-fable-5",
-      "trueiq": 69.71739215604828,
-      "conservative_score": 69.65418511897907,
-      "profile_q": 69.71739215604828,
+      "trueiq": 69.76745236306033,
+      "conservative_score": 69.6838667156945,
+      "profile_q": 69.76745236306033,
       "peak_p1": 69.91150442477876,
       "n_efforts": 5,
       "spam_strength": 0.0,
-      "interaction_style": "SURGICAL",
+      "interaction_style": "CLEAN",
       "effort_response": "SATURATING",
       "top_efficiency": "OVERTHINKING",
       "evidence": "STABLE",
@@ -213,7 +298,7 @@
           "pass1": 65.36697247706422,
           "run_trueiq": 65.36697247706422,
           "run_conservative": 61.204651266825714,
-          "interaction_style": "SURGICAL",
+          "interaction_style": "CLEAN",
           "run_efficiency": "SCALING",
           "run_note": "DEEP-STEPS"
         },
@@ -263,9 +348,9 @@
     },
     {
       "model_id": "glm-5-3",
-      "trueiq": 68.98829175087809,
+      "trueiq": 69.04636697211703,
       "conservative_score": 68.95787139689578,
-      "profile_q": 68.98829175087809,
+      "profile_q": 69.04636697211703,
       "peak_p1": 68.95787139689578,
       "n_efforts": 1,
       "spam_strength": 0.0,
@@ -286,15 +371,15 @@
           "run_conservative": 64.05179277132382,
           "interaction_style": "CLEAN",
           "run_efficiency": "BASELINE",
-          "run_note": "DELIBERATE"
+          "run_note": "NORMAL-RUN"
         }
       ]
     },
     {
       "model_id": "kimi-k3",
-      "trueiq": 68.63332834605498,
+      "trueiq": 68.69140356729392,
       "conservative_score": 68.51441241685144,
-      "profile_q": 68.63332834605498,
+      "profile_q": 68.69140356729392,
       "peak_p1": 68.51441241685144,
       "n_efforts": 1,
       "spam_strength": 0.0,
@@ -321,9 +406,9 @@
     },
     {
       "model_id": "grok-4-6",
-      "trueiq": 66.78691208112994,
-      "conservative_score": 66.64833799306604,
-      "profile_q": 66.78691208112994,
+      "trueiq": 66.83350272501619,
+      "conservative_score": 66.7069316047917,
+      "profile_q": 66.83350272501619,
       "peak_p1": 67.47787610619469,
       "n_efforts": 4,
       "spam_strength": 0.0,
@@ -344,7 +429,7 @@
           "run_conservative": 38.78394758238655,
           "interaction_style": "CLEAN",
           "run_efficiency": "BASELINE",
-          "run_note": "NORMAL-RUN"
+          "run_note": "FAST-LOOP"
         },
         {
           "effort": "medium",
@@ -392,9 +477,9 @@
     },
     {
       "model_id": "gpt-5-6-terra",
-      "trueiq": 66.06868120383493,
-      "conservative_score": 64.95519590827121,
-      "profile_q": 66.06868120383493,
+      "trueiq": 66.1078819781712,
+      "conservative_score": 65.00124955871368,
+      "profile_q": 66.1078819781712,
       "peak_p1": 69.62305986696231,
       "n_efforts": 5,
       "spam_strength": 0.0,
@@ -477,9 +562,9 @@
     },
     {
       "model_id": "gpt-5-5",
-      "trueiq": 65.07632940897598,
-      "conservative_score": 64.43109177465233,
-      "profile_q": 65.07632940897598,
+      "trueiq": 65.14478350189633,
+      "conservative_score": 64.51232379898862,
+      "profile_q": 65.14478350189633,
       "peak_p1": 67.03539823008849,
       "n_efforts": 4,
       "spam_strength": 0.0,
@@ -548,9 +633,9 @@
     },
     {
       "model_id": "glm-5-3-flash",
-      "trueiq": 63.37626422250316,
-      "conservative_score": 63.359671302149174,
-      "profile_q": 63.37626422250316,
+      "trueiq": 63.388432364096076,
+      "conservative_score": 63.38400758533501,
+      "profile_q": 63.388432364096076,
       "peak_p1": 63.39285714285714,
       "n_efforts": 1,
       "spam_strength": 0.0,
@@ -577,9 +662,9 @@
     },
     {
       "model_id": "deepseek-v4-pro",
-      "trueiq": 62.99225663716814,
+      "trueiq": 63.00442477876106,
       "conservative_score": 62.83185840707964,
-      "profile_q": 62.99225663716814,
+      "profile_q": 63.00442477876106,
       "peak_p1": 62.83185840707964,
       "n_efforts": 1,
       "spam_strength": 0.0,
@@ -606,9 +691,9 @@
     },
     {
       "model_id": "gpt-5-6-luna",
-      "trueiq": 62.67508757374632,
-      "conservative_score": 61.22373801622419,
-      "profile_q": 62.67508757374632,
+      "trueiq": 62.7142883480826,
+      "conservative_score": 61.26979166666666,
+      "profile_q": 62.7142883480826,
       "peak_p1": 67.1875,
       "n_efforts": 5,
       "spam_strength": 0.0,
@@ -643,7 +728,7 @@
           "run_conservative": 9.279573492645582,
           "interaction_style": "CLEAN",
           "run_efficiency": "SCALING",
-          "run_note": "DELIBERATE"
+          "run_note": "NORMAL-RUN"
         },
         {
           "effort": "high",
@@ -743,7 +828,7 @@
           "run_conservative": 38.553353808733966,
           "interaction_style": "CHURNING",
           "run_efficiency": "BASELINE",
-          "run_note": "NORMAL-RUN"
+          "run_note": "STEP-HEAVY"
         },
         {
           "effort": "medium",
@@ -785,7 +870,7 @@
           "run_conservative": 50.72127363610581,
           "interaction_style": "CLEAN",
           "run_efficiency": "EFFICIENT",
-          "run_note": "DELIBERATE"
+          "run_note": "NORMAL-RUN"
         },
         {
           "effort": "max",
@@ -799,15 +884,15 @@
           "run_conservative": 56.581527417950504,
           "interaction_style": "CLEAN",
           "run_efficiency": "SCALING",
-          "run_note": "DEEP-STEPS"
+          "run_note": "NORMAL-RUN"
         }
       ]
     },
     {
       "model_id": "gemini-3-8-flash",
-      "trueiq": 55.56666768129714,
-      "conservative_score": 52.59084679574745,
-      "profile_q": 73.1140364227594,
+      "trueiq": 55.61572299103166,
+      "conservative_score": 52.64038496169151,
+      "profile_q": 73.1785828829364,
       "peak_p1": 73.8255033557047,
       "n_efforts": 2,
       "spam_strength": 1.0,
@@ -842,7 +927,7 @@
           "run_conservative": 52.907789942259186,
           "interaction_style": "SPAMMER",
           "run_efficiency": "EFFICIENT",
-          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+          "run_note": "MECHANICAL-CHURN+FAST-LOOP"
         }
       ]
     },
@@ -1048,63 +1133,6 @@
       ]
     },
     {
-      "model_id": "gemini-3-7-flash",
-      "trueiq": 52.29796527588351,
-      "conservative_score": 50.23337377665351,
-      "profile_q": 63.901319532237665,
-      "peak_p1": 65.48672566371681,
-      "n_efforts": 3,
-      "spam_strength": 0.8000000000000003,
-      "interaction_style": "SPAMMER",
-      "effort_response": "SATURATING",
-      "top_efficiency": "EFFICIENT",
-      "evidence": "VARIABLE",
-      "runs": [
-        {
-          "effort": "low",
-          "steps": 130.37610619469027,
-          "out_tokens": 73364.9557522124,
-          "cost": 1.8322645629424779,
-          "duration": 1252.0731730707964,
-          "run_q": 53.76106194690266,
-          "pass1": 53.76106194690266,
-          "run_trueiq": 43.9989998872451,
-          "run_conservative": 40.741400642681974,
-          "interaction_style": "SPAMMER",
-          "run_efficiency": "BASELINE",
-          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
-        },
-        {
-          "effort": "medium",
-          "steps": 117.36946902654867,
-          "out_tokens": 93990.8517699115,
-          "cost": 2.0251351826880533,
-          "duration": 1240.376194079646,
-          "run_q": 65.48672566371681,
-          "pass1": 65.48672566371681,
-          "run_trueiq": 53.595489574586615,
-          "run_conservative": 50.045556270746786,
-          "interaction_style": "SPAMMER",
-          "run_efficiency": "SCALING",
-          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
-        },
-        {
-          "effort": "high",
-          "steps": 124.51548672566372,
-          "out_tokens": 107248.30309734514,
-          "cost": 2.1762860351216813,
-          "duration": 1244.9565387986725,
-          "run_q": 65.2654867256637,
-          "pass1": 65.2654867256637,
-          "run_trueiq": 53.41442373142922,
-          "run_conservative": 50.56215853104246,
-          "interaction_style": "SPAMMER",
-          "run_efficiency": "EFFICIENT",
-          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
-        }
-      ]
-    },
-    {
       "model_id": "gpt-5-4",
       "trueiq": 51.76991150442478,
       "conservative_score": 51.76991150442478,
@@ -1129,7 +1157,64 @@
           "run_conservative": 47.38447436557234,
           "interaction_style": "CLEAN",
           "run_efficiency": "BASELINE",
-          "run_note": "DEEP-STEPS"
+          "run_note": "NORMAL-RUN"
+        }
+      ]
+    },
+    {
+      "model_id": "gemini-3-7-flash",
+      "trueiq": 51.643730421633606,
+      "conservative_score": 49.4700636572165,
+      "profile_q": 63.91214917825537,
+      "peak_p1": 65.48672566371681,
+      "n_efforts": 3,
+      "spam_strength": 0.8363636363636364,
+      "interaction_style": "SPAMMER",
+      "effort_response": "SATURATING",
+      "top_efficiency": "EFFICIENT",
+      "evidence": "VARIABLE",
+      "runs": [
+        {
+          "effort": "low",
+          "steps": 130.37610619469027,
+          "out_tokens": 73364.9557522124,
+          "cost": 1.8322645629424779,
+          "duration": 1252.0731730707964,
+          "run_q": 53.76106194690266,
+          "pass1": 53.76106194690266,
+          "run_trueiq": 43.44122089562275,
+          "run_conservative": 40.183621651059624,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "BASELINE",
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+        },
+        {
+          "effort": "medium",
+          "steps": 117.36946902654867,
+          "out_tokens": 93990.8517699115,
+          "cost": 2.0251351826880533,
+          "duration": 1240.376194079646,
+          "run_q": 65.48672566371681,
+          "pass1": 65.48672566371681,
+          "run_trueiq": 52.916055082733884,
+          "run_conservative": 49.366121778894055,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "SCALING",
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
+        },
+        {
+          "effort": "high",
+          "steps": 124.51548672566372,
+          "out_tokens": 107248.30309734514,
+          "cost": 2.1762860351216813,
+          "duration": 1244.9565387986725,
+          "run_q": 65.2654867256637,
+          "pass1": 65.2654867256637,
+          "run_trueiq": 52.73728462637329,
+          "run_conservative": 49.885019425986535,
+          "interaction_style": "SPAMMER",
+          "run_efficiency": "EFFICIENT",
+          "run_note": "MECHANICAL-CHURN+DEEP-STEPS+FAST-LOOP"
         }
       ]
     },
@@ -1317,7 +1402,7 @@
           "run_conservative": 7.3452716064517105,
           "interaction_style": "CLEAN",
           "run_efficiency": "BASELINE",
-          "run_note": "DELIBERATE"
+          "run_note": "NORMAL-RUN"
         }
       ]
     }
