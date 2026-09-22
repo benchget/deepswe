@@ -2,7 +2,7 @@
 
 ## Dataset
 - Scope: Every DeepSWE rollout across imported Pier jobs, grouped by configuration (harness + model + reasoning effort)
-- Generated at: 2026-09-03T22:24:37.984682+00:00
+- Generated at: 2026-09-22T06:27:15.860279+00:00
 - Task set: 113
 
 ## Top models
